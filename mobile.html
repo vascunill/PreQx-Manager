@@ -638,7 +638,7 @@ function openDet(id) {
     '<div class="qr-sec"><canvas id="qrc'+id+'" width="80" height="80"></canvas><div class="qr-lbl">Dossier #'+String(id).padStart(4,'0')+'</div></div>'+
     '<div style="height:20px"></div>';
 
-  var btnPab=(rm==='heaven'&&canEdit())?'<button class="abtn abtn-p" onclick="scheduleOR('+id+')">Confirmar Pabellon Miercoles</button>':'';
+  var btnTopon=canEdit()?'<button style="width:100%;padding:13px;border-radius:11px;border:none;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:6px;background:'+(p.topon?'#16A34A':'#120F08')+';color:#fff;" onclick="toggleTopon('+id+')">'+( p.topon?'OK TOPON PA DENTRO':'TOPON PA DENTRO')+'</button>':''; var btnPab=(rm==='heaven'&&canEdit())?'<button class="abtn abtn-p" onclick="scheduleOR('+id+')">Confirmar Pabellon Miercoles</button>':'';
   var toponColor=p.topon?'#16A34A':'var(--ink)';
   var toponTxt=p.topon?'TOPON OK - '+( p.topon_by||''):'TOPON PA DENTRO';
   var btnTopon=canEdit()?'<button class="abtn abtn-p" style="background:'+toponColor+'" onclick="toggleTopon('+id+')">'+toponTxt+'</button>':'';
