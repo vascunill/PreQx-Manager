@@ -523,7 +523,7 @@ function calcProg(p) {
   ['lab','imagenes','evaluaciones','docs'].forEach(function(g){ p.checklist[g].forEach(function(i){ if(!i.na){t++;if(i.done)d++;} }); });
   return t===0?100:Math.round(d/t*100);
 }
-function getRealm(p) { var pct=calcProg(p); return pct===100?'heaven':pct===0?'hell':'pending'; }
+function getRealm(p) { if (p.topon) return 'heaven'; var pct=calcProg(p); return pct===100?'heaven':pct===0?'hell':'pending'; }
 function getDays(p) { return Math.floor((new Date()-new Date(p.fecha_ingreso||p.created_at))/86400000); }
 function fmtD(s) { if(!s) return '--'; return new Date(s+'T12:00:00').toLocaleDateString('es-CL',{day:'numeric',month:'short',year:'numeric'}); }
 function canEdit() { return role==='admin'||role==='editor'; }
@@ -581,6 +581,7 @@ function render() {
     html+='<div class="pc-prog"><div class="prog-ring">';
     html+='<svg width="30" height="30" viewBox="0 0 30 30"><circle cx="15" cy="15" r="'+R+'" fill="none" stroke="#F0EDE8" stroke-width="3"/><circle cx="15" cy="15" r="'+R+'" fill="none" stroke="'+rc+'" stroke-width="3" stroke-dasharray="'+dash+' '+circ+'" stroke-linecap="round"/></svg>';
     html+='<div class="prog-ring-txt">'+pct+'%</div></div></div>';
+    if (p.topon) { html+='<div style="position:absolute;top:6px;right:8px;background:#16A34A;color:#fff;font-family:DM Mono,monospace;font-size:8px;padding:2px 6px;border-radius:99px;letter-spacing:1px;">TOPON</div>'; }
     html+='</div></div>';
   });
   list.innerHTML=html;
@@ -591,7 +592,7 @@ function openDet(id) {
   if (!p) return;
   var rm=getRealm(p),pct=calcProg(p),d=getDays(p);
   var bncls={heaven:'bnh',pending:'bnp',hell:'bnl'}[rm];
-  var bntxt={heaven:'Carlo Heaven - Listo para pabellon',pending:'En proceso - Completar checklist',hell:'Nancy Hell - Sin preparacion'}[rm];
+  var bntxt={heaven:'Carlos Heaven - Listo para pabellon',pending:'En proceso - Completar checklist',hell:'Nancys Hell - Sin preparacion'}[rm];
   var pcc={heaven:'#C9A84C',pending:'#2563EB',hell:'#B82424'}[rm];
   var ptags2={P1:'t1',P2:'t2',P3:'t3'};
   var gl={lab:'A. Laboratorio',imagenes:'B. Imagenes',evaluaciones:'C. Evaluaciones',docs:'D. Documentacion'};
@@ -638,9 +639,12 @@ function openDet(id) {
     '<div style="height:20px"></div>';
 
   var btnPab=(rm==='heaven'&&canEdit())?'<button class="abtn abtn-p" onclick="scheduleOR('+id+')">Confirmar Pabellon Miercoles</button>':'';
+  var toponColor=p.topon?'#16A34A':'var(--ink)';
+  var toponTxt=p.topon?'TOPON OK - '+( p.topon_by||''):'TOPON PA DENTRO';
+  var btnTopon=canEdit()?'<button class="abtn abtn-p" style="background:'+toponColor+'" onclick="toggleTopon('+id+')">'+toponTxt+'</button>':'';
   var btnEdit=canEdit()?'<button class="abtn abtn-s" onclick="openEdit('+id+')">Editar datos</button>':'';
   var btnDel=role==='admin'?'<button class="abtn abtn-d" onclick="removePat('+id+')">Retirar de lista</button>':'';
-  document.getElementById('dv-actions').innerHTML=btnPab+btnEdit+btnDel;
+  document.getElementById('dv-actions').innerHTML=btnTopon+btnPab+btnEdit+btnDel;
 
   document.getElementById('detview').classList.add('on');
 
@@ -823,6 +827,22 @@ function cMo(id) { document.getElementById(id).classList.remove('on'); }
 function moOvClick(e,id) { if(e.target===document.getElementById(id)) cMo(id); }
 document.addEventListener('keydown',function(e){ if(e.key==='Enter'&&document.getElementById('login').classList.contains('on')) doLogin(); });
 function toast(m,t) { var el=document.getElementById('tst'); el.textContent=m; el.className='tst on '+(t||''); setTimeout(function(){ el.classList.remove('on'); },3000); }
+
+async function toggleTopon(id) {
+  if (!canEdit()) return;
+  var p=patients.find(function(x){ return x.id===id; });
+  if (!p) return;
+  var newVal=!p.topon;
+  var email=cu?cu.email:'';
+  await sb.from('pacientes').update({
+    topon:newVal,
+    topon_by:newVal?email:null,
+    topon_at:newVal?new Date().toISOString():null
+  }).eq('id',id);
+  p.topon=newVal; p.topon_by=newVal?email:null;
+  openDet(id); render();
+  toast(newVal?'TOPON PA DENTRO confirmado':'Topon retirado',newVal?'s':'');
+}
 
 init();
 </script>
