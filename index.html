@@ -324,7 +324,7 @@ function buildCL(pat,items){
   return result;
 }
 function calcProg(p){var t=0,d=0;["lab","imagenes","evaluaciones","docs"].forEach(function(g){p.checklist[g].forEach(function(i){if(!i.na){t++;if(i.done)d++;}});});return t===0?100:Math.round(d/t*100);}
-function getRealm(p){var pct=calcProg(p);return pct===100?"heaven":pct===0?"hell":"pending";}
+function getRealm(p){if(p.topon)return "heaven";var pct=calcProg(p);return pct===100?"heaven":pct===0?"hell":"pending";}
 function getDays(p){return Math.floor((new Date()-new Date(p.fecha_ingreso||p.created_at))/86400000);}
 function fmtD(s){if(!s)return "--";return new Date(s+"T12:00:00").toLocaleDateString("es-CL",{day:"numeric",month:"long",year:"numeric"});}
 function canEdit(){return role==="admin"||role==="editor";}
@@ -407,7 +407,7 @@ function openDet(id){
   var cie=pt.cie10?"<span class=\"tag\" style=\"background:#F0F4FF;color:#3B4ED8\">"+pt.cie10+"</span>":"";
   var fon=pt.fonasa?"<span class=\"tag\" style=\"background:#F5F0FF;color:#6B21A8\">"+pt.fonasa+"</span>":"";
   var obs=pt.observaciones?"<div class=\"dfl\" style=\"flex-direction:column;gap:3px\"><span class=\"fll\">Observaciones</span><span style=\"font-size:12px;color:#3D3120;line-height:1.5\">"+pt.observaciones+"</span></div>":"";
-  var btnTopon=canEdit()?"<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:"+(p.topon?"#16A34A":"#120F08")+";color:#fff;\" onclick=\"toggleTopon("+id+")\">"+(p.topon?"OK TOPON PA DENTRO":"TOPON PA DENTRO")+"</button>":""; var btnPab=rm==="heaven"&&canEdit()?"<button class=\"bf bp\" onclick=\"scheduleOR("+id+")\">Confirmar Pabellon Miercoles</button>":"";
+  var btnTopon=canEdit()?"<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:"+(pt.topon?"#16A34A":"#120F08")+";color:#fff;\" onclick=\"toggleTopon("+id+")\">"+(pt.topon?"OK TOPON PA DENTRO":"TOPON PA DENTRO")+"</button>":""; var btnPab=rm==="heaven"&&canEdit()?"<button class=\"bf bp\" onclick=\"scheduleOR("+id+")\">Confirmar Pabellon Miercoles</button>":"";
   var btnEdit=canEdit()?"<button class=\"bf bs\" onclick=\"openEdit("+id+")\">Editar datos</button>":"";
   var btnDel=role==="admin"?"<button class=\"bf bd\" onclick=\"removePat("+id+")\">Retirar de lista</button>":"";
   document.getElementById("demp").style.display="none";
