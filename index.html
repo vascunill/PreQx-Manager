@@ -10,848 +10,533 @@
 <style>
 :root{--gold:#C9A84C;--gold-lt:#F5E6B8;--gold-dk:#7A5C1E;--red:#B82424;--red-lt:#FFF0F0;--red-dk:#6B0F0F;--blue:#2563EB;--blue-lt:#EFF6FF;--ink:#120F08;--ink2:#3D3120;--ink3:#8A7A6A;--bg:#FDFAF4;--bdr:#E8DCC8;--sf:#F8F6F2;}
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
-html,body{height:100%;font-family:'Instrument Sans',sans-serif;background:var(--bg);color:var(--ink);overflow:hidden;}
+html,body{height:100%;font-family:sans-serif;background:var(--bg);color:var(--ink);overflow:hidden;}
 .scr{display:none;}.scr.on{display:flex;}
 #login{height:100vh;align-items:center;justify-content:center;background:#120F08;}
 .lbox{width:400px;background:#fff;border-radius:20px;overflow:hidden;box-shadow:0 32px 80px rgba(0,0,0,.5);}
 .ltop{background:#120F08;padding:36px;text-align:center;}
-.applogo{font-family:'Playfair Display',serif;font-size:24px;font-weight:700;color:#fff;}
+.applogo{font-size:24px;font-weight:700;color:#fff;margin-bottom:4px;}
 .applogo span{color:#C9A84C;}
-.lsub{font-family:'DM Mono',monospace;font-size:9px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
+.lsub{font-size:10px;color:#555;letter-spacing:2px;text-transform:uppercase;margin-top:6px;}
 .lbody{padding:28px 36px 32px;}
 .lmsg{border-radius:8px;padding:10px 14px;font-size:13px;margin-bottom:16px;display:none;}
-.lmsg.on{display:block;}
-.lmsg.e{background:#FFF0F0;color:#6B0F0F;border:1px solid #FFCACA;}
-.lmsg.s{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
+.lmsg.on{display:block;}.lmsg.e{background:#FFF0F0;color:#6B0F0F;border:1px solid #FFCACA;}.lmsg.s{background:#F0FDF4;color:#166534;border:1px solid #BBF7D0;}
 .fg{margin-bottom:14px;}
-.fl{font-family:'DM Mono',monospace;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;margin-bottom:5px;display:block;}
-.fi{width:100%;background:#F8F6F2;border:1px solid #E8DCC8;border-radius:8px;padding:10px 14px;font-family:'Instrument Sans',sans-serif;font-size:14px;color:#120F08;outline:none;}
+.fl{font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;margin-bottom:5px;display:block;}
+.fi{width:100%;background:#F8F6F2;border:1px solid #E8DCC8;border-radius:8px;padding:10px 14px;font-size:14px;color:#120F08;outline:none;}
 .fi:focus{border-color:#120F08;}
-.blg{width:100%;background:#120F08;color:#fff;border:none;border-radius:10px;padding:13px;font-family:'Instrument Sans',sans-serif;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;}
-.blg:disabled{opacity:.6;cursor:not-allowed;}
+.blg{width:100%;background:#120F08;color:#fff;border:none;border-radius:10px;padding:13px;font-size:15px;font-weight:600;cursor:pointer;margin-top:4px;}
+.blg:disabled{opacity:.6;}
 .lfg{text-align:center;margin-top:12px;font-size:12px;color:#8A7A6A;}
 .lfg a{color:#2563EB;text-decoration:none;}
 #app{height:100vh;flex-direction:column;overflow:hidden;}
-.grid{display:grid;grid-template-rows:60px 1fr;grid-template-columns:280px 1fr 340px;grid-template-areas:'h h h' 'sb m d';height:100vh;overflow:hidden;}
+.grid{display:grid;grid-template-rows:60px 1fr;grid-template-columns:280px 1fr 340px;grid-template-areas:"h h h" "sb m d";height:100vh;overflow:hidden;}
 header{grid-area:h;background:#120F08;padding:0 24px;display:flex;align-items:center;gap:20px;border-bottom:1px solid #1C1810;z-index:100;}
-.appt{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#fff;}
-.appt span{color:#C9A84C;}
-.apps{font-family:'DM Mono',monospace;font-size:8px;color:#444;letter-spacing:1.5px;}
+.apptitle{font-size:17px;font-weight:700;color:#fff;}
+.apptitle span{color:#C9A84C;}
+.appsub{font-size:8px;color:#444;letter-spacing:1.5px;text-transform:uppercase;}
 .hst{display:flex;gap:14px;}
 .hs{text-align:center;}
-.hsn{font-family:'Playfair Display',serif;font-size:18px;font-weight:700;line-height:1;}
+.hsn{font-size:18px;font-weight:700;line-height:1;}
 .cg{color:#C9A84C;}.cr{color:#B82424;}.cb{color:#64B5F6;}.cw{color:#fff;}
-.hsl{font-family:'DM Mono',monospace;font-size:7px;color:#444;letter-spacing:1px;text-transform:uppercase;}
+.hsl{font-size:7px;color:#444;letter-spacing:1px;text-transform:uppercase;}
 .hdv{width:1px;height:26px;background:#222;}
-.hright{margin-left:auto;display:flex;align-items:center;gap:8px;}
+.hr{margin-left:auto;display:flex;align-items:center;gap:8px;}
 .upill{display:flex;align-items:center;gap:8px;background:#1C1810;border:1px solid #2A2010;border-radius:99px;padding:4px 12px 4px 5px;}
-.uav{width:26px;height:26px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;font-family:'DM Mono',monospace;font-size:10px;font-weight:500;color:#120F08;}
-.unm{font-family:'Instrument Sans',sans-serif;font-size:12px;color:#aaa;}
-.uro{font-family:'DM Mono',monospace;font-size:8px;color:#444;letter-spacing:1px;}
-.bsm{background:transparent;border:1px solid #2A2010;color:#777;padding:5px 11px;border-radius:6px;font-family:'Instrument Sans',sans-serif;font-size:12px;cursor:pointer;}
+.uav{width:26px;height:26px;border-radius:50%;background:#C9A84C;display:flex;align-items:center;justify-content:center;font-size:10px;font-weight:500;color:#120F08;}
+.unm{font-size:12px;color:#aaa;}.url2{font-size:8px;color:#444;letter-spacing:1px;}
+.bsm{background:transparent;border:1px solid #2A2010;color:#777;padding:5px 11px;border-radius:6px;font-size:12px;cursor:pointer;}
 .bsm:hover{background:#1C1810;color:#ccc;}
-.bgd{background:#C9A84C;border-color:#C9A84C;color:#120F08;font-weight:600;}
+.gd{background:#C9A84C;border-color:#C9A84C;color:#120F08;font-weight:600;}
 aside.sb{grid-area:sb;background:#120F08;border-right:1px solid #1C1810;overflow-y:auto;display:flex;flex-direction:column;}
 .sbs{padding:10px;}
-.sbin{width:100%;background:#0E0C07;border:1px solid #2A2010;border-radius:6px;padding:8px 12px;color:#ccc;font-family:'Instrument Sans',sans-serif;font-size:13px;outline:none;}
+.sbin{width:100%;background:#0E0C07;border:1px solid #2A2010;border-radius:6px;padding:8px 12px;color:#ccc;font-size:13px;outline:none;}
 .sbin::placeholder{color:#333;}
 .sbsec{padding:10px;border-bottom:1px solid #1C1810;}
-.sblbl{font-family:'DM Mono',monospace;font-size:9px;color:#3A3020;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
-.sbb{display:flex;align-items:center;justify-content:space-between;width:100%;padding:7px 9px;border-radius:5px;border:none;background:transparent;color:#555;font-family:'Instrument Sans',sans-serif;font-size:13px;cursor:pointer;text-align:left;}
-.sbb:hover{background:#1C1810;color:#aaa;}
-.sbb.on{background:#1C1810;color:#fff;}
+.sblbl{font-size:9px;color:#3A3020;letter-spacing:2px;text-transform:uppercase;margin-bottom:7px;}
+.sbb{display:flex;align-items:center;justify-content:space-between;width:100%;padding:7px 9px;border-radius:5px;border:none;background:transparent;color:#555;font-size:13px;cursor:pointer;text-align:left;}
+.sbb:hover{background:#1C1810;color:#aaa;}.sbb.on{background:#1C1810;color:#fff;}
 .sbbl{display:flex;align-items:center;gap:7px;}
 .sbd{width:6px;height:6px;border-radius:50%;}
 .da{background:#555;}.dg{background:#C9A84C;}.dp{background:#64B5F6;}.dr{background:#B82424;}
-.sbc{font-family:'DM Mono',monospace;font-size:9px;background:#1C1810;color:#444;padding:1px 6px;border-radius:99px;}
+.sbc{font-size:9px;background:#1C1810;color:#444;padding:1px 6px;border-radius:99px;}
 .sbb.on .sbc{background:#2A2010;color:#666;}
 .sbleg{padding:14px;margin-top:auto;}
 .lgi{display:flex;align-items:flex-start;gap:9px;margin-bottom:10px;}
 .lgic{font-size:16px;flex-shrink:0;}
-.lgn{font-family:'Playfair Display',serif;font-size:12px;font-style:italic;color:#888;}
-.lgd{font-family:'DM Mono',monospace;font-size:8px;color:#3A3020;letter-spacing:1px;text-transform:uppercase;}
+.lgn{font-size:12px;font-style:italic;color:#888;}
+.lgd{font-size:8px;color:#3A3020;letter-spacing:1px;text-transform:uppercase;}
 main{grid-area:m;overflow-y:auto;padding:16px;background:var(--bg);}
 .mhdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
-.vt{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;}
+.vt{font-size:19px;font-weight:700;}
 .srtbs{display:flex;gap:4px;}
-.srtb{background:#fff;border:1px solid #E8DCC8;border-radius:5px;padding:4px 9px;font-family:'DM Mono',monospace;font-size:9px;color:#8A7A6A;cursor:pointer;letter-spacing:1px;text-transform:uppercase;}
+.srtb{background:#fff;border:1px solid #E8DCC8;border-radius:5px;padding:4px 9px;font-size:9px;color:#8A7A6A;cursor:pointer;letter-spacing:1px;text-transform:uppercase;}
 .srtb.on{background:#120F08;color:#fff;border-color:#120F08;}
 .plist{display:flex;flex-direction:column;gap:6px;}
 .pc{background:#fff;border:1px solid #E8DCC8;border-radius:11px;padding:11px 13px;display:grid;grid-template-columns:auto 1fr auto auto;align-items:center;gap:11px;cursor:pointer;transition:all .12s;position:relative;overflow:hidden;}
-.pc::before{content:'';position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
-.pc.heaven::before{background:#C9A84C;}
-.pc.hell::before{background:#B82424;}
-.pc.pending::before{background:#2563EB;}
-.pc:hover{border-color:#bbb;transform:translateX(2px);}
-.pc.sel{border-color:#120F08;box-shadow:0 4px 14px rgba(0,0,0,.1);}
+.pc::before{content:"";position:absolute;left:0;top:0;bottom:0;width:3px;border-radius:3px 0 0 3px;}
+.pc.heaven::before{background:#C9A84C;}.pc.hell::before{background:#B82424;}.pc.pending::before{background:#2563EB;}
+.pc:hover{border-color:#bbb;transform:translateX(2px);}.pc.sel{border-color:#120F08;box-shadow:0 4px 14px rgba(0,0,0,.1);}
 .crlm{display:flex;flex-direction:column;align-items:center;gap:1px;min-width:32px;}
-.ric{font-size:18px;line-height:1;}
-.rlb{font-family:'DM Mono',monospace;font-size:7px;color:#8A7A6A;}
+.ric{font-size:18px;line-height:1;}.rlb{font-size:7px;color:#8A7A6A;}
 .cinf{min-width:0;}
-.cnm{font-family:'Playfair Display',serif;font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+.cnm{font-size:14px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
 .cmt{display:flex;gap:5px;margin-top:2px;flex-wrap:wrap;align-items:center;}
-.crt{font-family:'DM Mono',monospace;font-size:10px;color:#8A7A6A;}
-.tag{font-family:'DM Mono',monospace;font-size:9px;padding:1px 6px;border-radius:99px;font-weight:500;}
+.crt{font-size:10px;color:#8A7A6A;}
+.tag{font-size:9px;padding:1px 6px;border-radius:99px;font-weight:500;}
 .tp{background:#F0EDE8;color:#3D3120;}
-.t1{background:#FFE4E4;color:#991B1B;}
-.t2{background:#FEF3C7;color:#92400E;}
-.t3{background:#ECFDF5;color:#065F46;}
+.t1{background:#FFE4E4;color:#991B1B;}.t2{background:#FEF3C7;color:#92400E;}.t3{background:#ECFDF5;color:#065F46;}
 .cpr{display:flex;flex-direction:column;align-items:flex-end;gap:2px;min-width:68px;}
 .prbw{width:68px;height:4px;background:#EEE;border-radius:99px;overflow:hidden;}
 .prbf{height:100%;border-radius:99px;}
-.fh{background:#C9A84C;}
-.ff{background:#B82424;}
-.fp{background:#2563EB;}
-.prp{font-family:'DM Mono',monospace;font-size:10px;color:#8A7A6A;}
+.fhv{background:#C9A84C;}.fhl{background:#B82424;}.fpd{background:#2563EB;}
+.prp{font-size:10px;color:#8A7A6A;}
 .cdy{text-align:right;min-width:40px;}
-.dyn{font-family:'Playfair Display',serif;font-size:15px;font-weight:700;line-height:1;}
-.dyl{font-family:'DM Mono',monospace;font-size:7px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;}
+.dyn{font-size:15px;font-weight:700;line-height:1;}
+.dyl{font-size:7px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;}
 .emp{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:50px 20px;text-align:center;color:#8A7A6A;}
-.empi{font-size:40px;margin-bottom:10px;}
-.empt{font-family:'Playfair Display',serif;font-size:16px;font-style:italic;}
+.empi{font-size:40px;margin-bottom:10px;}.empt{font-size:16px;font-style:italic;}
 aside.det{grid-area:d;background:#fff;border-left:1px solid #E8DCC8;overflow-y:auto;display:flex;flex-direction:column;}
 .demp{display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%;color:#8A7A6A;text-align:center;padding:28px;}
-.dempi{font-size:44px;margin-bottom:10px;opacity:.25;}
-.dempt{font-family:'Playfair Display',serif;font-size:14px;font-style:italic;opacity:.45;}
+.dempi{font-size:44px;margin-bottom:10px;opacity:.25;}.dempt{font-size:14px;font-style:italic;opacity:.45;}
 .dhdr{padding:16px 16px 12px;border-bottom:1px solid #E8DCC8;position:sticky;top:0;background:#fff;z-index:10;}
-.dbn{display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:7px;margin-bottom:11px;font-family:'Playfair Display',serif;font-size:11px;font-style:italic;}
-.bnh{background:#F5E6B8;color:#7A5C1E;}
-.bnl{background:#FFF0F0;color:#6B0F0F;}
-.bnp{background:#EFF6FF;color:#2563EB;}
-.dnm{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;}
-.drt{font-family:'DM Mono',monospace;font-size:10px;color:#8A7A6A;margin-top:2px;}
+.dbn{display:flex;align-items:center;gap:7px;padding:6px 11px;border-radius:7px;margin-bottom:11px;font-size:11px;font-style:italic;}
+.bnh{background:#F5E6B8;color:#7A5C1E;}.bnl{background:#FFF0F0;color:#6B0F0F;}.bnp{background:#EFF6FF;color:#2563EB;}
+.dnm{font-size:17px;font-weight:700;}
+.drt{font-size:10px;color:#8A7A6A;margin-top:2px;}
 .dtg{display:flex;gap:4px;margin-top:7px;flex-wrap:wrap;}
 .dbody{padding:13px 16px;flex:1;}
 .dprg{background:#F8F6F2;border:1px solid #E8DCC8;border-radius:9px;padding:11px 13px;margin-bottom:13px;display:flex;align-items:center;gap:12px;}
-.dpct{font-family:'Playfair Display',serif;font-size:26px;font-weight:700;line-height:1;}
+.dpct{font-size:26px;font-weight:700;line-height:1;}
 .dbw{flex:1;height:5px;background:#E8DCC8;border-radius:99px;overflow:hidden;}
 .dbf{height:100%;border-radius:99px;}
 .dsec{margin-bottom:14px;}
-.dst{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8A7A6A;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
-.dst::after{content:'';flex:1;height:1px;background:#E8DCC8;}
+.dst{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#8A7A6A;margin-bottom:7px;display:flex;align-items:center;gap:7px;}
+.dst::after{content:"";flex:1;height:1px;background:#E8DCC8;}
 .dfl{display:flex;justify-content:space-between;padding:5px 0;border-bottom:1px dashed #F0EDE8;gap:8px;}
 .dfl:last-child{border-bottom:none;}
-.fll{font-size:12px;color:#8A7A6A;}
-.flv{font-size:12px;font-weight:600;color:#120F08;text-align:right;}
-.clgt{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#8A7A6A;margin:9px 0 4px;}
+.fll{font-size:12px;color:#8A7A6A;}.flv{font-size:12px;font-weight:600;color:#120F08;text-align:right;}
+.clgt{font-size:9px;letter-spacing:1.5px;text-transform:uppercase;color:#8A7A6A;margin:9px 0 4px;}
 .cli{display:flex;align-items:center;gap:8px;padding:5px 6px;border-radius:5px;cursor:pointer;user-select:none;}
 .cli:hover{background:#F8F6F2;}
 .clbx{width:16px;height:16px;border-radius:3px;border:2px solid #D0C8B8;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:9px;}
 .cli.done .clbx{background:#C9A84C;border-color:#C9A84C;color:#fff;}
 .cli.na .clbx{background:#EEE;border-color:#DDD;color:#888;font-size:7px;}
-.cllb{font-family:'Instrument Sans',sans-serif;font-size:12px;color:#3D3120;line-height:1.3;flex:1;}
+.cllb{font-size:12px;color:#3D3120;line-height:1.3;flex:1;}
 .cli.done .cllb{color:#8A7A6A;text-decoration:line-through;}
 .qrw{display:flex;flex-direction:column;align-items:center;padding:8px 0;}
-.qru{font-family:'DM Mono',monospace;font-size:9px;color:#8A7A6A;margin-top:5px;text-align:center;}
+.qru{font-size:9px;color:#8A7A6A;margin-top:5px;text-align:center;}
 .dftr{padding:11px 16px;border-top:1px solid #E8DCC8;display:flex;flex-direction:column;gap:6px;position:sticky;bottom:0;background:#fff;}
-.bf{padding:9px 13px;border-radius:7px;border:none;font-family:'Instrument Sans',sans-serif;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;width:100%;}
-.bp{background:#120F08;color:#fff;}
-.bs{background:#F8F6F2;border:1px solid #E8DCC8;color:#120F08;}
-.bd{background:#FFF0F0;color:#6B0F0F;border:1px solid #FFCACA;}
+.bf{padding:9px 13px;border-radius:7px;border:none;font-size:13px;font-weight:600;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:5px;width:100%;}
+.bp{background:#120F08;color:#fff;}.bs{background:#F8F6F2;border:1px solid #E8DCC8;color:#120F08;}.bd{background:#FFF0F0;color:#6B0F0F;border:1px solid #FFCACA;}
 .mo{display:none;position:fixed;inset:0;background:rgba(10,8,4,.7);z-index:1000;align-items:center;justify-content:center;}
 .mo.on{display:flex;}
 .mdl{background:#fff;border-radius:16px;width:520px;max-height:90vh;overflow-y:auto;box-shadow:0 32px 80px rgba(0,0,0,.3);}
 .mdl.wide{width:620px;}
 .mhd{padding:20px 24px 16px;border-bottom:1px solid #E8DCC8;display:flex;align-items:flex-start;justify-content:space-between;}
-.mtt{font-family:'Playfair Display',serif;font-size:19px;font-weight:700;}
-.mst{font-family:'DM Mono',monospace;font-size:9px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
+.mtt{font-size:19px;font-weight:700;}
+.mst{font-size:9px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;margin-top:2px;}
 .mxb{background:#F0EDE8;border:none;width:26px;height:26px;border-radius:50%;cursor:pointer;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
 .mbdy{padding:20px 24px;}
 .fg2{display:grid;grid-template-columns:1fr 1fr;gap:11px;}
 .fgf{grid-column:1/-1;}
-.fgl{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;margin-bottom:4px;display:block;}
-.fgc{background:#F8F6F2;border:1px solid #E8DCC8;border-radius:7px;padding:8px 11px;font-family:'Instrument Sans',sans-serif;font-size:13px;color:#120F08;outline:none;width:100%;}
+.fgl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;margin-bottom:4px;display:block;}
+.fgc{background:#F8F6F2;border:1px solid #E8DCC8;border-radius:7px;padding:8px 11px;font-size:13px;color:#120F08;outline:none;width:100%;}
 .fgc:focus{border-color:#120F08;}
 textarea.fgc{resize:vertical;min-height:55px;}
 .mft{padding:13px 24px 20px;display:flex;gap:9px;justify-content:flex-end;border-top:1px solid #E8DCC8;}
-.mb{padding:9px 18px;border-radius:7px;font-family:'Instrument Sans',sans-serif;font-size:13px;cursor:pointer;}
+.mb{padding:9px 18px;border-radius:7px;font-size:13px;cursor:pointer;}
 .mbc{border:1px solid #E8DCC8;background:#fff;color:#120F08;}
 .mbs{border:none;background:#120F08;color:#fff;font-weight:600;}
 .ut{width:100%;border-collapse:collapse;}
-.ut th{font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;padding:7px 11px;text-align:left;border-bottom:1px solid #E8DCC8;}
+.ut th{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;padding:7px 11px;text-align:left;border-bottom:1px solid #E8DCC8;}
 .ut td{padding:9px 11px;border-bottom:1px dashed #F0EDE8;font-size:13px;}
-.rb{font-family:'DM Mono',monospace;font-size:9px;padding:2px 7px;border-radius:99px;}
-.ra{background:#FFF8E7;color:#7A5C1E;}
-.re{background:#EFF6FF;color:#2563EB;}
-.rl{background:#F0FDF4;color:#16A34A;}
+.rb{font-size:9px;padding:2px 7px;border-radius:99px;}
+.ra{background:#FFF8E7;color:#7A5C1E;}.re{background:#EFF6FF;color:#2563EB;}.rl{background:#F0FDF4;color:#16A34A;}
 .brev{background:#FFF0F0;border:none;color:#6B0F0F;padding:3px 9px;border-radius:5px;font-size:11px;cursor:pointer;}
-::-webkit-scrollbar{width:4px;}
-::-webkit-scrollbar-thumb{background:#D0C8B8;border-radius:99px;}
+::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#D0C8B8;border-radius:99px;}
 .tst{position:fixed;bottom:20px;right:20px;z-index:9999;background:#120F08;color:#fff;padding:11px 16px;border-radius:9px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.3);display:none;}
-.tst.on{display:block;}
-.tst.s{background:#166534;}
-.tst.e{background:#6B0F0F;}
+.tst.on{display:block;}.tst.s{background:#166534;}.tst.e{background:#6B0F0F;}
 </style>
 </head>
 <body>
-
-<!-- LOGIN -->
 <div id="login" class="scr">
-  <div class="lbox">
-    <div class="ltop">
-      <div style="font-size:32px;margin-bottom:12px">&#9877;</div>
-      <div class="applogo">PreQx <span>Manager</span></div>
-      <div class="lsub">Unidad Prequirurgica - Cirugia Vascular - HGF</div>
-    </div>
-    <div class="lbody">
-      <div class="lmsg" id="lmsg"></div>
-      <div class="fg">
-        <label class="fl">Email</label>
-        <input class="fi" id="le" type="email" placeholder="usuario@redsalud.gov.cl" autocomplete="email">
-      </div>
-      <div class="fg">
-        <label class="fl">Contrasena</label>
-        <input class="fi" id="lp" type="password" placeholder="........" autocomplete="current-password">
-      </div>
-      <button class="blg" id="blg" onclick="doLogin()">Ingresar</button>
-      <div class="lfg"><a href="#" onclick="doReset(event)">Olvide mi contrasena</a></div>
-    </div>
-  </div>
+<div class="lbox">
+<div class="ltop">
+<div style="font-size:32px;margin-bottom:12px">&#9877;</div>
+<div class="applogo">PreQx <span>Manager</span></div>
+<div class="lsub">Unidad Prequirurgica &middot; Cirugia Vascular &middot; HGF</div>
 </div>
-
-<!-- APP -->
-<div id="app" class="scr">
-  <div class="grid">
-    <header>
-      <div>
-        <div class="appt">PreQx <span>Manager</span></div>
-        <div class="apps">CIRUGIA VASCULAR - HGF VINA DEL MAR</div>
-      </div>
-      <div class="hst" id="hst"></div>
-      <div class="hright">
-        <div class="upill" id="upill"></div>
-        <button class="bsm" onclick="openTeam()" id="btnteam" style="display:none">Equipo</button>
-        <button class="bsm bgd" onclick="openModal()" id="btnnew">+ Paciente</button>
-        <button class="bsm" onclick="doLogout()">Salir</button>
-      </div>
-    </header>
-
-    <aside class="sb">
-      <div class="sbs">
-        <input class="sbin" id="sbq" placeholder="Buscar..." oninput="render()">
-      </div>
-      <div class="sbsec">
-        <div class="sblbl">Estado</div>
-        <button class="sbb on" id="fb-all" onclick="setF('all',this)">
-          <span class="sbbl"><span class="sbd da"></span>Todos</span>
-          <span class="sbc" id="fca">0</span>
-        </button>
-        <button class="sbb" id="fb-hv" onclick="setF('heaven',this)">
-          <span class="sbbl"><span class="sbd dg"></span>Carlo Heaven &#9728;</span>
-          <span class="sbc" id="fcg">0</span>
-        </button>
-        <button class="sbb" id="fb-pd" onclick="setF('pending',this)">
-          <span class="sbbl"><span class="sbd dp"></span>En proceso &#8987;</span>
-          <span class="sbc" id="fcp">0</span>
-        </button>
-        <button class="sbb" id="fb-hl" onclick="setF('hell',this)">
-          <span class="sbbl"><span class="sbd dr"></span>Nancy Hell &#128293;</span>
-          <span class="sbc" id="fcr">0</span>
-        </button>
-      </div>
-      <div class="sbsec">
-        <div class="sblbl">Prioridad</div>
-        <button class="sbb on" onclick="setPr('all',this)">Todas</button>
-        <button class="sbb" onclick="setPr('P1',this)">P1 - Urgencia diferida</button>
-        <button class="sbb" onclick="setPr('P2',this)">P2 - Alta prioridad</button>
-        <button class="sbb" onclick="setPr('P3',this)">P3 - Electivo</button>
-      </div>
-      <div class="sbsec">
-        <div class="sblbl">Patologia</div>
-        <button class="sbb on" onclick="setPt('all',this)">Todas</button>
-        <button class="sbb" onclick="setPt('AAA',this)">Aneurisma Aorta AAA</button>
-        <button class="sbb" onclick="setPt('Carotida',this)">Endarterectomia Carotidea</button>
-        <button class="sbb" onclick="setPt('Bypass',this)">Bypass Arterial</button>
-        <button class="sbb" onclick="setPt('Venoso',this)">Insuf. Venosa</button>
-      </div>
-      <div class="sbleg">
-        <div class="lgi"><div class="lgic">&#9728;</div><div><div class="lgn">Carlo Heaven</div><div class="lgd">Expediente 100% listo</div></div></div>
-        <div class="lgi"><div class="lgic">&#8987;</div><div><div class="lgn">En proceso</div><div class="lgd">Checklist incompleto</div></div></div>
-        <div class="lgi"><div class="lgic">&#128293;</div><div><div class="lgn">Nancy Hell</div><div class="lgd">Sin preparacion</div></div></div>
-      </div>
-    </aside>
-
-    <main>
-      <div class="mhdr">
-        <div>
-          <div class="vt">Lista de Espera</div>
-          <div style="font-family:'DM Mono',monospace;font-size:9px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Cirugia Vascular - HGF</div>
-        </div>
-        <div class="srtbs">
-          <button class="srtb on" onclick="setS('dias',this)">Dias</button>
-          <button class="srtb" onclick="setS('prio',this)">Prioridad</button>
-          <button class="srtb" onclick="setS('prog',this)">Progreso</button>
-          <button class="srtb" onclick="setS('nom',this)">Nombre</button>
-        </div>
-      </div>
-      <div class="plist" id="plist"></div>
-    </main>
-
-    <aside class="det" id="dpanel">
-      <div class="demp" id="demp">
-        <div class="dempi">&#9877;</div>
-        <div class="dempt">Selecciona un paciente para ver su dossier</div>
-      </div>
-      <div id="dcont" style="display:none;flex:1;flex-direction:column;"></div>
-    </aside>
-  </div>
+<div class="lbody">
+<div class="lmsg" id="lmsg"></div>
+<div class="fg"><label class="fl">Email</label><input class="fi" id="le" type="email" placeholder="usuario@redsalud.gov.cl"></div>
+<div class="fg"><label class="fl">Contrasena</label><input class="fi" id="lp" type="password" placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"></div>
+<button class="blg" id="blg" onclick="doLogin()">Ingresar</button>
+<div class="lfg"><a href="#" onclick="doReset(event)">Olvide mi contrasena</a></div>
+</div></div></div>
+<div id="app" class="scr"><div class="grid">
+<header>
+<div><div class="apptitle">PreQx <span>Manager</span></div><div class="appsub">CIRUGIA VASCULAR &middot; HGF</div></div>
+<div class="hst" id="hst"></div>
+<div class="hr">
+<div class="upill" id="upill"></div>
+<button class="bsm" onclick="openTeam()" id="btnteam" style="display:none">Equipo</button>
+<button class="bsm gd" onclick="openModal()" id="btnnew">+ Paciente</button>
+<button class="bsm" onclick="doLogout()">Salir</button>
+</div></header>
+<aside class="sb">
+<div class="sbs"><input class="sbin" id="sbq" placeholder="Buscar..." oninput="render()"></div>
+<div class="sbsec"><div class="sblbl">Estado</div>
+<button class="sbb on" onclick="setF('all',this)"><span class="sbbl"><span class="sbd da"></span>Todos</span><span class="sbc" id="fca">0</span></button>
+<button class="sbb" onclick="setF('heaven',this)"><span class="sbbl"><span class="sbd dg"></span>Carlo&#39;s Heaven &#9728;</span><span class="sbc" id="fcg">0</span></button>
+<button class="sbb" onclick="setF('pending',this)"><span class="sbbl"><span class="sbd dp"></span>En proceso &#8987;</span><span class="sbc" id="fcp">0</span></button>
+<button class="sbb" onclick="setF('hell',this)"><span class="sbbl"><span class="sbd dr"></span>Nancy&#39;s Hell &#128293;</span><span class="sbc" id="fcr">0</span></button></div>
+<div class="sbsec"><div class="sblbl">Prioridad</div>
+<button class="sbb on" onclick="setPr('all',this)">Todas</button>
+<button class="sbb" onclick="setPr('P1',this)">P1 Urgencia diferida</button>
+<button class="sbb" onclick="setPr('P2',this)">P2 Alta prioridad</button>
+<button class="sbb" onclick="setPr('P3',this)">P3 Electivo</button></div>
+<div class="sbsec"><div class="sblbl">Patologia</div>
+<button class="sbb on" onclick="setPt('all',this)">Todas</button>
+<button class="sbb" onclick="setPt('AAA',this)">Aneurisma Aorta AAA</button>
+<button class="sbb" onclick="setPt('Carotida',this)">Endarterectomia Carotidea</button>
+<button class="sbb" onclick="setPt('Bypass',this)">Bypass Arterial</button>
+<button class="sbb" onclick="setPt('Venoso',this)">Insuf. Venosa</button></div>
+<div class="sbleg">
+<div class="lgi"><div class="lgic">&#9728;</div><div><div class="lgn">Carlo&#39;s Heaven</div><div class="lgd">Expediente 100% listo</div></div></div>
+<div class="lgi"><div class="lgic">&#8987;</div><div><div class="lgn">En proceso</div><div class="lgd">Checklist incompleto</div></div></div>
+<div class="lgi"><div class="lgic">&#128293;</div><div><div class="lgn">Nancy&#39;s Hell</div><div class="lgd">Sin preparacion</div></div></div>
+</div></aside>
+<main>
+<div class="mhdr"><div><div class="vt">Lista de Espera</div><div style="font-size:9px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Cirugia Vascular - HGF</div></div>
+<div class="srtbs">
+<button class="srtb on" onclick="setS('dias',this)">Dias</button>
+<button class="srtb" onclick="setS('prio',this)">Prioridad</button>
+<button class="srtb" onclick="setS('prog',this)">Progreso</button>
+<button class="srtb" onclick="setS('nom',this)">Nombre</button>
+</div></div>
+<div class="plist" id="plist"></div>
+</main>
+<aside class="det" id="dpanel">
+<div class="demp" id="demp"><div class="dempi">&#9877;</div><div class="dempt">Selecciona un paciente para ver su dossier</div></div>
+<div id="dcont" style="display:none;flex:1;flex-direction:column;"></div>
+</aside>
+</div></div>
+<div class="mo" id="mpat"><div class="mdl">
+<div class="mhd"><div><div class="mtt" id="mtt">Nuevo Paciente</div><div class="mst">LISTA DE ESPERA</div></div><button class="mxb" onclick="cMo('mpat')">X</button></div>
+<div class="mbdy"><div class="fg2">
+<div class="fgf"><label class="fgl">Nombre completo</label><input class="fgc" id="fn" placeholder="Apellido Apellido, Nombre"></div>
+<div><label class="fgl">RUT</label><input class="fgc" id="fr" placeholder="12.345.678-9"></div>
+<div><label class="fgl">Edad</label><input class="fgc" id="fe" type="number" placeholder="67"></div>
+<div><label class="fgl">Patologia</label><select class="fgc" id="fp"><option value="AAA">AAA</option><option value="Carotida">Carotida</option><option value="Bypass">Bypass</option><option value="Venoso">Venoso</option></select></div>
+<div><label class="fgl">Prioridad</label><select class="fgc" id="fpr"><option value="P1">P1 Urgente</option><option value="P2">P2 Alta</option><option value="P3">P3 Electiva</option></select></div>
+<div><label class="fgl">CIE-10</label><input class="fgc" id="fc10" placeholder="I71.4"></div>
+<div><label class="fgl">FONASA</label><input class="fgc" id="ffon" placeholder="13-01-030"></div>
+<div><label class="fgl">Fecha ingreso lista</label><input class="fgc" id="fd" type="date"></div>
+<div class="fgf"><label class="fgl">Observaciones</label><textarea class="fgc" id="fo" placeholder="Comorbilidades, situacion clinica..."></textarea></div>
+</div></div>
+<div class="mft"><button class="mb mbc" onclick="cMo('mpat')">Cancelar</button><button class="mb mbs" id="mpsv" onclick="savePat()">Guardar</button></div>
+</div></div>
+<div class="mo" id="mteam"><div class="mdl wide">
+<div class="mhd"><div><div class="mtt">Gestion de Equipo</div><div class="mst">ACCESO Y ROLES - SOLO ADMIN</div></div><button class="mxb" onclick="cMo('mteam')">X</button></div>
+<div class="mbdy">
+<div style="background:#F8F6F2;border-radius:10px;padding:14px;margin-bottom:16px;">
+<div style="font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;margin-bottom:9px;">Invitar colega</div>
+<div style="display:grid;grid-template-columns:1fr 150px 110px;gap:9px;align-items:flex-end;">
+<div><label class="fgl">Email</label><input class="fgc" id="ie" type="email" placeholder="colega@redsalud.gov.cl"></div>
+<div><label class="fgl">Rol</label><select class="fgc" id="ir"><option value="editor">Editor</option><option value="reader">Lector</option><option value="admin">Admin</option></select></div>
+<button class="mb mbs" style="height:36px;padding:0 14px;" onclick="inviteUser()">Invitar</button>
 </div>
-
-<!-- MODAL PACIENTE -->
-<div class="mo" id="mpat">
-  <div class="mdl">
-    <div class="mhd">
-      <div><div class="mtt" id="mtt">Nuevo Paciente</div><div class="mst">LISTA DE ESPERA</div></div>
-      <button class="mxb" onclick="cMo('mpat')">X</button>
-    </div>
-    <div class="mbdy">
-      <div class="fg2">
-        <div class="fgf"><label class="fgl">Nombre completo</label><input class="fgc" id="fn" placeholder="Apellido Apellido, Nombre"></div>
-        <div><label class="fgl">RUT</label><input class="fgc" id="fr" placeholder="12.345.678-9"></div>
-        <div><label class="fgl">Edad</label><input class="fgc" id="fe" type="number" placeholder="67"></div>
-        <div>
-          <label class="fgl">Patologia</label>
-          <select class="fgc" id="fp">
-            <option value="AAA">AAA</option>
-            <option value="Carotida">Carotida</option>
-            <option value="Bypass">Bypass</option>
-            <option value="Venoso">Venoso</option>
-          </select>
-        </div>
-        <div>
-          <label class="fgl">Prioridad</label>
-          <select class="fgc" id="fpr">
-            <option value="P1">P1 - Urgente</option>
-            <option value="P2">P2 - Alta</option>
-            <option value="P3">P3 - Electiva</option>
-          </select>
-        </div>
-        <div><label class="fgl">CIE-10</label><input class="fgc" id="fc10" placeholder="I71.4"></div>
-        <div><label class="fgl">FONASA</label><input class="fgc" id="ffon" placeholder="13-01-030"></div>
-        <div><label class="fgl">Fecha ingreso lista</label><input class="fgc" id="fd" type="date"></div>
-        <div class="fgf"><label class="fgl">Observaciones</label><textarea class="fgc" id="fo" placeholder="Comorbilidades, situacion clinica..."></textarea></div>
-      </div>
-    </div>
-    <div class="mft">
-      <button class="mb mbc" onclick="cMo('mpat')">Cancelar</button>
-      <button class="mb mbs" id="mpsv" onclick="savePat()">Guardar</button>
-    </div>
-  </div>
+<div style="font-size:11px;color:#8A7A6A;margin-top:7px;">El colega crea su cuenta con ese email.</div>
 </div>
-
-<!-- MODAL EQUIPO -->
-<div class="mo" id="mteam">
-  <div class="mdl wide">
-    <div class="mhd">
-      <div><div class="mtt">Gestion de Equipo</div><div class="mst">ACCESO Y ROLES - SOLO ADMIN</div></div>
-      <button class="mxb" onclick="cMo('mteam')">X</button>
-    </div>
-    <div class="mbdy">
-      <div style="background:#F8F6F2;border-radius:10px;padding:14px;margin-bottom:16px;">
-        <div style="font-family:'DM Mono',monospace;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;margin-bottom:9px;">Invitar colega</div>
-        <div style="display:grid;grid-template-columns:1fr 150px 110px;gap:9px;align-items:flex-end;">
-          <div><label class="fgl">Email</label><input class="fgc" id="ie" type="email" placeholder="colega@redsalud.gov.cl"></div>
-          <div>
-            <label class="fgl">Rol</label>
-            <select class="fgc" id="ir">
-              <option value="editor">Editor</option>
-              <option value="reader">Lector</option>
-              <option value="admin">Admin</option>
-            </select>
-          </div>
-          <button class="mb mbs" style="height:36px;padding:0 14px;" onclick="inviteUser()">Invitar</button>
-        </div>
-        <div style="font-size:11px;color:#8A7A6A;margin-top:7px;">El colega crea su cuenta con ese email en la app.</div>
-      </div>
-      <div id="utbl"></div>
-    </div>
-    <div class="mft"><button class="mb mbc" onclick="cMo('mteam')">Cerrar</button></div>
-  </div>
+<div id="utbl"></div>
 </div>
-
+<div class="mft"><button class="mb mbc" onclick="cMo('mteam')">Cerrar</button></div>
+</div></div>
 <div class="tst" id="tst"></div>
-
 <script>
-var SURL = 'https://prdbmwwxyvialtfcatsc.supabase.co';
-var SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByZGJtd3d4eXZpYWx0ZmNhdHNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4ODY4OTMsImV4cCI6MjA4OTQ2Mjg5M30.uMHiDGS0rVB9aS2IUj0PnBdRHdGP-UVIDtKfp-XuxzA';
-var sb = supabase.createClient(SURL, SKEY);
-
-var CL = {
-  AAA:{
-    lab:['Hemograma completo','Coagulacion (TP, TTPA, INR)','Funcion renal','Electrolitos','Glicemia HbA1c','Perfil hepatico','Grupo y pruebas cruzadas','Orina completa','Gases arteriales'],
-    imagenes:['AngioTAC aorto-iliaco con contraste','Eco doppler carotideo','Rx torax AP y lateral','ECG 12 derivaciones'],
-    evaluaciones:['Evaluacion cardiologica y ecocardiograma','Pase operatorio cardiologico','Evaluacion anestesica','Evaluacion neumologica','Evaluacion nefrologica'],
-    docs:['Nota de ingreso firmada','Consentimiento informado firmado','Caprini calculado','Reserva UCI confirmada','Protesis disponible en pabellon','Hemoderivados en banco de sangre']
-  },
-  Carotida:{
-    lab:['Hemograma','Coagulacion','Funcion renal','Glicemia HbA1c','Perfil lipidico','Electrolitos','Orina completa','Grupo sanguineo'],
-    imagenes:['Eco doppler carotideo bilateral','AngioTAC vasos cuello','TAC cerebral sin contraste','Rx torax','ECG'],
-    evaluaciones:['Evaluacion neurologica','Pase cardiologico','Evaluacion anestesica'],
-    docs:['Nota de ingreso firmada','Consentimiento informado firmado','Caprini calculado','Shunt carotideo disponible']
-  },
-  Bypass:{
-    lab:['Hemograma','Coagulacion','Funcion renal','Glicemia HbA1c menor 9','Perfil lipidico','Electrolitos','Orina completa','Cultivo lesion','Grupo sanguineo'],
-    imagenes:['Eco doppler arterial EEII','Arteriografia AngioTAC EEII','Rx torax','ECG'],
-    evaluaciones:['Pase cardiologico OBLIGATORIO','Evaluacion diabetologica','Evaluacion nefrologica','Evaluacion infectologica','Evaluacion anestesica'],
-    docs:['Nota de ingreso firmada','Consentimiento informado firmado','Caprini calculado','Mapeo safena con eco','Protesis disponible']
-  },
-  Venoso:{
-    lab:['Hemograma','Coagulacion TP INR','Glicemia','Funcion renal basica'],
-    imagenes:['Eco doppler venoso EEII','Rx torax si 60 anos o mas','ECG si 60 anos o mas'],
-    evaluaciones:['Evaluacion anestesica','Pase cardiologico si cardiopatia activa'],
-    docs:['Nota de ingreso firmada','Consentimiento informado firmado','Caprini calculado','Marcacion venosa con eco']
-  }
+var SURL="https://prdbmwwxyvialtfcatsc.supabase.co";
+var SKEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByZGJtd3d4eXZpYWx0ZmNhdHNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4ODY4OTMsImV4cCI6MjA4OTQ2Mjg5M30.uMHiDGS0rVB9aS2IUj0PnBdRHdGP-UVIDtKfp-XuxzA";
+var sb=supabase.createClient(SURL,SKEY);
+var CL={
+AAA:{lab:["Hemograma completo","Coagulacion TP TTPA INR","Funcion renal","Electrolitos","Glicemia HbA1c","Perfil hepatico","Grupo pruebas cruzadas","Orina completa","Gases arteriales"],imagenes:["AngioTAC aorto-iliaco","Eco doppler carotideo","Rx torax","ECG 12 derivaciones"],evaluaciones:["Eval cardiologica ecocardiograma","Pase operatorio cardiologico","Eval anestesica","Eval neumologica","Eval nefrologica"],docs:["Nota de ingreso firmada","Consentimiento informado firmado","Caprini calculado","Reserva UCI/UTI confirmada","Protesis disponible pabellon","Hemoderivados banco de sangre"]},
+Carotida:{lab:["Hemograma","Coagulacion","Funcion renal","Glicemia HbA1c","Perfil lipidico","Electrolitos","Orina completa","Grupo sanguineo"],imagenes:["Eco doppler carotideo bilateral","AngioTAC vasos cuello","TAC cerebral sin contraste","Rx torax","ECG"],evaluaciones:["Eval neurologica","Pase cardiologico","Eval anestesica"],docs:["Nota de ingreso firmada","Consentimiento informado firmado","Caprini calculado","Shunt carotideo disponible"]},
+Bypass:{lab:["Hemograma","Coagulacion","Funcion renal","Glicemia HbA1c","Perfil lipidico","Electrolitos","Orina completa","Cultivo lesion","Grupo sanguineo"],imagenes:["Eco doppler arterial EEII","Arteriografia AngioTAC EEII","Rx torax","ECG"],evaluaciones:["Pase cardiologico OBLIGATORIO","Eval diabetologica","Eval nefrologica","Eval infectologica","Eval anestesica"],docs:["Nota de ingreso firmada","Consentimiento informado firmado","Caprini calculado","Mapeo safena eco","Protesis disponible"]},
+Venoso:{lab:["Hemograma","Coagulacion TP INR","Glicemia","Funcion renal basica"],imagenes:["Eco doppler venoso EEII","Rx torax si 60 anos","ECG si 60 anos"],evaluaciones:["Eval anestesica","Pase cardiologico si cardiopatia"],docs:["Nota de ingreso firmada","Consentimiento informado firmado","Caprini calculado","Marcacion venosa eco"]}
 };
-
-var patients = [], cu = null, role = null, editId = null, selId = null;
-var flt = 'all', prio = 'all', pat = 'all', srt = 'dias';
-
-async function init() {
-  try {
-    var res = await sb.auth.getSession();
-    if (res.data && res.data.session) {
-      cu = res.data.session.user;
-      await loadRole();
-      showApp();
-    } else {
-      showScr('login');
-    }
-    sb.auth.onAuthStateChange(function(ev, sess) {
-      if (ev === 'SIGNED_IN') { cu = sess.user; loadRole().then(showApp); }
-      else if (ev === 'SIGNED_OUT') { cu = null; role = null; showScr('login'); }
-    });
-  } catch(e) { showScr('login'); }
+var patients=[],cu=null,role=null,editId=null,selId=null;
+var flt="all",prio="all",pat="all",srt="dias";
+async function init(){
+  var res=await sb.auth.getSession();
+  if(res.data&&res.data.session){cu=res.data.session.user;await loadRole();showApp();}
+  else{showScr("login");}
+  sb.auth.onAuthStateChange(function(ev,sess){
+    if(ev==="SIGNED_IN"){cu=sess.user;loadRole().then(function(){showApp();});}
+    else if(ev==="SIGNED_OUT"){cu=null;role=null;showScr("login");}
+  });
 }
-
-async function loadRole() {
-  try {
-    var res = await sb.from('user_roles').select('role').eq('user_id', cu.id).single();
-    role = (res.data && res.data.role) ? res.data.role : 'reader';
-  } catch(e) { role = 'reader'; }
+async function loadRole(){
+  var res=await sb.from("user_roles").select("role").eq("user_id",cu.id).single();
+  role=(res.data&&res.data.role)?res.data.role:"reader";
 }
-
-async function doLogin() {
-  var email = document.getElementById('le').value.trim();
-  var pass = document.getElementById('lp').value;
-  if (!email || !pass) { showMsg('Ingresa email y contrasena', 'e'); return; }
-  var btn = document.getElementById('blg');
-  btn.disabled = true; btn.textContent = 'Ingresando...';
-  try {
-    var res = await sb.auth.signInWithPassword({email: email, password: pass});
-    if (res.error) { showMsg('Email o contrasena incorrectos', 'e'); btn.disabled = false; btn.textContent = 'Ingresar'; }
-  } catch(e) { showMsg('Error de conexion', 'e'); btn.disabled = false; btn.textContent = 'Ingresar'; }
+async function doLogin(){
+  var email=document.getElementById("le").value.trim();
+  var pass=document.getElementById("lp").value;
+  if(!email||!pass){showMsg("Ingresa email y contrasena","e");return;}
+  var btn=document.getElementById("blg");btn.disabled=true;btn.textContent="Ingresando...";
+  var res=await sb.auth.signInWithPassword({email:email,password:pass});
+  if(res.error){showMsg("Email o contrasena incorrectos","e");btn.disabled=false;btn.textContent="Ingresar";}
 }
-
-async function doLogout() { await sb.auth.signOut(); }
-
-async function doReset(e) {
+async function doLogout(){await sb.auth.signOut();}
+async function doReset(e){
   e.preventDefault();
-  var email = document.getElementById('le').value.trim();
-  if (!email) { showMsg('Ingresa tu email primero', 'e'); return; }
-  await sb.auth.resetPasswordForEmail(email, {redirectTo: window.location.href});
-  showMsg('Revisa tu email para restablecer la contrasena', 's');
+  var email=document.getElementById("le").value.trim();
+  if(!email){showMsg("Ingresa tu email primero","e");return;}
+  await sb.auth.resetPasswordForEmail(email,{redirectTo:window.location.href});
+  showMsg("Revisa tu email para restablecer la contrasena","s");
 }
-
-function showMsg(m, t) {
-  var el = document.getElementById('lmsg');
-  el.textContent = m; el.className = 'lmsg on ' + t;
-}
-
-function showScr(id) {
-  document.querySelectorAll('.scr').forEach(function(s) { s.classList.remove('on'); });
-  document.getElementById(id).classList.add('on');
-}
-
-async function showApp() {
-  showScr('app');
-  var email = cu ? cu.email : '';
-  var ini = email.split('@')[0].slice(0, 2).toUpperCase();
-  var rl = {admin: 'Admin', editor: 'Editor', reader: 'Lector'}[role] || '';
-  document.getElementById('upill').innerHTML =
-    '<div class="uav">' + ini + '</div>' +
-    '<div><div class="unm">' + email.split('@')[0] + '</div><div class="uro">' + rl + '</div></div>';
-  if (role === 'admin') document.getElementById('btnteam').style.display = 'block';
-  if (role === 'reader') document.getElementById('btnnew').style.display = 'none';
+function showMsg(m,t){var el=document.getElementById("lmsg");el.textContent=m;el.className="lmsg on "+t;}
+function showScr(id){document.querySelectorAll(".scr").forEach(function(s){s.classList.remove("on");});document.getElementById(id).classList.add("on");}
+async function showApp(){
+  showScr("app");
+  var email=cu?cu.email:"";
+  var ini=email.split("@")[0].slice(0,2).toUpperCase();
+  var rl={admin:"Admin",editor:"Editor",reader:"Lector"}[role]||"";
+  document.getElementById("upill").innerHTML="<div class=\"uav\">"+ini+"</div><div><div class=\"unm\">"+email.split("@")[0]+"</div><div class=\"url2\">"+rl+"</div></div>";
+  if(role==="admin")document.getElementById("btnteam").style.display="block";
+  if(role==="reader")document.getElementById("btnnew").style.display="none";
   await loadPats();
 }
-
-async function loadPats() {
-  try {
-    var res = await sb.from('pacientes').select('*, checklist_items(*)').order('created_at', {ascending: true});
-    if (res.error) { toast('Error cargando pacientes', 'e'); return; }
-    patients = (res.data || []).map(function(p) {
-      return Object.assign({}, p, {checklist: buildCL(p.patologia, p.checklist_items || [])});
-    });
-    render();
-  } catch(e) { toast('Error de conexion', 'e'); }
+async function loadPats(){
+  var res=await sb.from("pacientes").select("*, checklist_items(*)").order("created_at",{ascending:true});
+  if(res.error){toast("Error cargando pacientes","e");return;}
+  patients=(res.data||[]).map(function(p){return Object.assign({},p,{checklist:buildCL(p.patologia,p.checklist_items||[])});});
+  render();
 }
-
-function buildCL(pat, items) {
-  var t = CL[pat] || CL.AAA;
-  var result = {};
-  ['lab', 'imagenes', 'evaluaciones', 'docs'].forEach(function(g) {
-    result[g] = (t[g] || []).map(function(label) {
-      var sv = items.find(function(i) { return i.grupo === g && i.label === label; });
-      return {label: label, done: sv ? sv.done : false, na: sv ? sv.na : false, db_id: sv ? sv.id : null};
+function buildCL(pat,items){
+  var t=CL[pat]||CL.AAA;var result={};
+  ["lab","imagenes","evaluaciones","docs"].forEach(function(g){
+    result[g]=(t[g]||[]).map(function(label){
+      var sv=items.find(function(i){return i.grupo===g&&i.label===label;});
+      return {label:label,done:sv?sv.done:false,na:sv?sv.na:false,db_id:sv?sv.id:null};
     });
   });
   return result;
 }
-
-function calcProg(p) {
-  var t = 0, d = 0;
-  ['lab', 'imagenes', 'evaluaciones', 'docs'].forEach(function(g) {
-    p.checklist[g].forEach(function(i) { if (!i.na) { t++; if (i.done) d++; } });
-  });
-  return t === 0 ? 100 : Math.round(d / t * 100);
-}
-
-function getRealm(p) { var pct = calcProg(p); return pct === 100 ? 'heaven' : pct === 0 ? 'hell' : 'pending'; }
-function getDays(p) { return Math.floor((new Date() - new Date(p.fecha_ingreso || p.created_at)) / 86400000); }
-function fmtD(s) { if (!s) return '--'; return new Date(s + 'T12:00:00').toLocaleDateString('es-CL', {day: 'numeric', month: 'long', year: 'numeric'}); }
-function canEdit() { return role === 'admin' || role === 'editor'; }
-
-function setF(f, btn) {
-  flt = f;
-  document.querySelectorAll('.sbb').forEach(function(b) {
-    if (b.id && b.id.indexOf('fb-') === 0) b.classList.remove('on');
-  });
-  btn.classList.add('on');
-  render();
-}
-
-function setPr(p, btn) {
-  prio = p;
-  var btns = document.querySelectorAll('.sbsec:nth-child(3) .sbb');
-  btns.forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
-  render();
-}
-
-function setPt(p, btn) {
-  pat = p;
-  var btns = document.querySelectorAll('.sbsec:nth-child(4) .sbb');
-  btns.forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
-  render();
-}
-
-function setS(s, btn) {
-  srt = s;
-  document.querySelectorAll('.srtb').forEach(function(b) { b.classList.remove('on'); });
-  btn.classList.add('on');
-  render();
-}
-
-function getFilt() {
-  var q = (document.getElementById('sbq') ? document.getElementById('sbq').value : '').toLowerCase();
-  var po = {P1: 0, P2: 1, P3: 2};
-  return patients.filter(function(p) {
-    if (flt !== 'all' && getRealm(p) !== flt) return false;
-    if (prio !== 'all' && p.prioridad !== prio) return false;
-    if (pat !== 'all' && p.patologia !== pat) return false;
-    if (q) {
-      var hay = (p.nombre + ' ' + (p.rut || '') + ' ' + p.patologia + ' ' + (p.cie10 || '') + ' ' + (p.observaciones || '')).toLowerCase();
-      if (hay.indexOf(q) < 0) return false;
-    }
+function calcProg(p){var t=0,d=0;["lab","imagenes","evaluaciones","docs"].forEach(function(g){p.checklist[g].forEach(function(i){if(!i.na){t++;if(i.done)d++;}});});return t===0?100:Math.round(d/t*100);}
+function getRealm(p){var pct=calcProg(p);return pct===100?"heaven":pct===0?"hell":"pending";}
+function getDays(p){return Math.floor((new Date()-new Date(p.fecha_ingreso||p.created_at))/86400000);}
+function fmtD(s){if(!s)return "--";return new Date(s+"T12:00:00").toLocaleDateString("es-CL",{day:"numeric",month:"long",year:"numeric"});}
+function canEdit(){return role==="admin"||role==="editor";}
+function setF(f,btn){flt=f;document.querySelectorAll(".sbb").forEach(function(b){if(b.getAttribute("onclick")&&b.getAttribute("onclick").indexOf("setF")>-1)b.classList.remove("on");});btn.classList.add("on");render();}
+function setPr(p,btn){prio=p;document.querySelectorAll(".sbb").forEach(function(b){if(b.getAttribute("onclick")&&b.getAttribute("onclick").indexOf("setPr")>-1)b.classList.remove("on");});btn.classList.add("on");render();}
+function setPt(p,btn){pat=p;document.querySelectorAll(".sbb").forEach(function(b){if(b.getAttribute("onclick")&&b.getAttribute("onclick").indexOf("setPt")>-1)b.classList.remove("on");});btn.classList.add("on");render();}
+function setS(s,btn){srt=s;document.querySelectorAll(".srtb").forEach(function(b){b.classList.remove("on");});btn.classList.add("on");render();}
+function getFilt(){
+  var q=(document.getElementById("sbq")?document.getElementById("sbq").value:"").toLowerCase();
+  var po={P1:0,P2:1,P3:2};
+  return patients.filter(function(p){
+    if(flt!=="all"&&getRealm(p)!==flt)return false;
+    if(prio!=="all"&&p.prioridad!==prio)return false;
+    if(pat!=="all"&&p.patologia!==pat)return false;
+    if(q){var h=(p.nombre+" "+(p.rut||"")+" "+p.patologia+" "+(p.cie10||"")+" "+(p.observaciones||"")).toLowerCase();if(h.indexOf(q)<0)return false;}
     return true;
-  }).sort(function(a, b) {
-    if (srt === 'dias') return getDays(b) - getDays(a);
-    if (srt === 'prio') return (po[a.prioridad] || 0) - (po[b.prioridad] || 0);
-    if (srt === 'nom') return a.nombre.localeCompare(b.nombre);
-    if (srt === 'prog') return calcProg(a) - calcProg(b);
+  }).sort(function(a,b){
+    if(srt==="dias")return getDays(b)-getDays(a);
+    if(srt==="prio")return po[a.prioridad]-po[b.prioridad];
+    if(srt==="nom")return a.nombre.localeCompare(b.nombre);
+    if(srt==="prog")return calcProg(a)-calcProg(b);
     return 0;
   });
 }
-
-function render() {
-  var c = {heaven: 0, pending: 0, hell: 0};
-  patients.forEach(function(p) { c[getRealm(p)]++; });
-  document.getElementById('hst').innerHTML =
-    '<div class="hs"><div class="hsn cw">' + patients.length + '</div><div class="hsl">Total</div></div>' +
-    '<div class="hdv"></div>' +
-    '<div class="hs"><div class="hsn cg">' + c.heaven + '</div><div class="hsl">Heaven</div></div>' +
-    '<div class="hs"><div class="hsn cb">' + c.pending + '</div><div class="hsl">Proceso</div></div>' +
-    '<div class="hs"><div class="hsn cr">' + c.hell + '</div><div class="hsl">Hell</div></div>';
-  document.getElementById('fca').textContent = patients.length;
-  document.getElementById('fcg').textContent = c.heaven;
-  document.getElementById('fcp').textContent = c.pending;
-  document.getElementById('fcr').textContent = c.hell;
-
-  var fil = getFilt();
-  var list = document.getElementById('plist');
-  if (!fil.length) {
-    list.innerHTML = '<div class="emp"><div class="empi">&#128269;</div><div class="empt">Sin pacientes en esta vista</div></div>';
-    return;
+function render(){
+  var c={heaven:0,pending:0,hell:0};
+  patients.forEach(function(p){c[getRealm(p)]++;});
+  document.getElementById("hst").innerHTML="<div class=\"hs\"><div class=\"hsn cw\">"+patients.length+"</div><div class=\"hsl\">Total</div></div><div class=\"hdv\"></div><div class=\"hs\"><div class=\"hsn cg\">"+c.heaven+"</div><div class=\"hsl\">Heaven</div></div><div class=\"hs\"><div class=\"hsn cb\">"+c.pending+"</div><div class=\"hsl\">Proceso</div></div><div class=\"hs\"><div class=\"hsn cr\">"+c.hell+"</div><div class=\"hsl\">Hell</div></div>";
+  document.getElementById("fca").textContent=patients.length;
+  document.getElementById("fcg").textContent=c.heaven;
+  document.getElementById("fcp").textContent=c.pending;
+  document.getElementById("fcr").textContent=c.hell;
+  var fil=getFilt();
+  var list=document.getElementById("plist");
+  if(!fil.length){list.innerHTML="<div class=\"emp\"><div class=\"empi\">?</div><div class=\"empt\">Sin pacientes en esta vista</div></div>";return;}
+  var ri={heaven:{i:"&#9728;",l:"Heaven"},pending:{i:"&#8987;",l:"Proceso"},hell:{i:"&#128293;",l:"Hell"}};
+  var ptag={P1:"t1",P2:"t2",P3:"t3"};
+  var html="";
+  fil.forEach(function(pt){
+    var rm=getRealm(pt),pct=calcProg(pt),d=getDays(pt);
+    var sel=selId===pt.id?" sel":"";
+    html+="<div class=\"pc "+rm+sel+"\" onclick=\"openDet("+pt.id+")\">";
+    html+="<div class=\"crlm\"><div class=\"ric\">"+ri[rm].i+"</div><div class=\"rlb\">"+ri[rm].l+"</div></div>";
+    html+="<div class=\"cinf\"><div class=\"cnm\">"+pt.nombre+"</div>";
+    html+="<div class=\"cmt\"><span class=\"crt\">"+(pt.rut||"")+"</span>";
+    html+="<span class=\"tag tp\">"+pt.patologia+"</span>";
+    html+="<span class=\"tag "+(ptag[pt.prioridad]||"")+"\">"+pt.prioridad+"</span></div></div>";
+    html+="<div class=\"cpr\"><div class=\"prp\">"+pct+"%</div>";
+    var fc=rm==="heaven"?"fhv":rm==="hell"?"fhl":"fpd";
+    html+="<div class=\"prbw\"><div class=\"prbf "+fc+"\" style=\"width:"+pct+"%\"></div></div></div>";
+    html+="<div class=\"cdy\"><div class=\"dyn\">"+d+"</div><div class=\"dyl\">dias</div></div></div>";
+  });
+  list.innerHTML=html;
+}
+function openDet(id){
+  selId=id;render();
+  var pt=patients.find(function(x){return x.id===id;});
+  if(!pt)return;
+  var rm=getRealm(pt),pct=calcProg(pt),d=getDays(pt);
+  var bncls=rm==="heaven"?"bnh":rm==="pending"?"bnp":"bnl";
+  var bntxt=rm==="heaven"?"Carlo's Heaven - Listo para pabellon":rm==="pending"?"En proceso - Completar checklist":"Nancy's Hell - Sin preparacion";
+  var fcls=rm==="heaven"?"fhv":rm==="pending"?"fpd":"fhl";
+  var pcc=rm==="heaven"?"#C9A84C":rm==="pending"?"#2563EB":"#B82424";
+  var gl={lab:"A. Laboratorio",imagenes:"B. Imagenes",evaluaciones:"C. Evaluaciones",docs:"D. Documentacion"};
+  var ptag2={P1:"t1",P2:"t2",P3:"t3"};
+  var clhtml="";
+  ["lab","imagenes","evaluaciones","docs"].forEach(function(g){
+    var dc=0,tc=0;
+    pt.checklist[g].forEach(function(i){if(!i.na){tc++;if(i.done)dc++;}});
+    clhtml+="<div class=\"clgt\">"+gl[g]+" ("+dc+"/"+tc+")</div>";
+    pt.checklist[g].forEach(function(it,idx){
+      var st=it.na?"na":(it.done?"done":"");
+      var bx=it.done?"&#10003;":(it.na?"N/A":"");
+      var oc=canEdit()?"onclick=\"toggleItem("+id+",'"+g+"',"+idx+")\"":" ";
+      clhtml+="<div class=\"cli "+st+"\" "+oc+">";
+      clhtml+="<div class=\"clbx\">"+bx+"</div>";
+      clhtml+="<div class=\"cllb\">"+it.label+"</div></div>";
+    });
+  });
+  var cie=pt.cie10?"<span class=\"tag\" style=\"background:#F0F4FF;color:#3B4ED8\">"+pt.cie10+"</span>":"";
+  var fon=pt.fonasa?"<span class=\"tag\" style=\"background:#F5F0FF;color:#6B21A8\">"+pt.fonasa+"</span>":"";
+  var obs=pt.observaciones?"<div class=\"dfl\" style=\"flex-direction:column;gap:3px\"><span class=\"fll\">Observaciones</span><span style=\"font-size:12px;color:#3D3120;line-height:1.5\">"+pt.observaciones+"</span></div>":"";
+  var btnPab=rm==="heaven"&&canEdit()?"<button class=\"bf bp\" onclick=\"scheduleOR("+id+")\">Confirmar Pabellon Miercoles</button>":"";
+  var btnEdit=canEdit()?"<button class=\"bf bs\" onclick=\"openEdit("+id+")\">Editar datos</button>":"";
+  var btnDel=role==="admin"?"<button class=\"bf bd\" onclick=\"removePat("+id+")\">Retirar de lista</button>":"";
+  document.getElementById("demp").style.display="none";
+  var dc2=document.getElementById("dcont");
+  dc2.style.display="flex";dc2.style.flexDirection="column";
+  var ptag3={P1:"t1",P2:"t2",P3:"t3"};
+  dc2.innerHTML=
+    "<div class=\"dhdr\">"+
+    "<div class=\"dbn "+bncls+"\">"+bntxt+"</div>"+
+    "<div class=\"dnm\">"+pt.nombre+"</div>"+
+    "<div class=\"drt\">RUT "+(pt.rut||"--")+" - "+(pt.edad||"--")+" anos</div>"+
+    "<div class=\"dtg\"><span class=\"tag tp\">"+pt.patologia+"</span><span class=\"tag "+(ptag3[pt.prioridad]||"")+"\">"+pt.prioridad+"</span>"+cie+fon+"</div></div>"+
+    "<div class=\"dbody\">"+
+    "<div class=\"dprg\"><div class=\"dpct\" style=\"color:"+pcc+"\">"+pct+"%</div>"+
+    "<div style=\"flex:1\"><div style=\"font-size:9px;color:#8A7A6A;letter-spacing:1px;margin-bottom:4px\">EXPEDIENTE</div>"+
+    "<div class=\"dbw\"><div class=\"dbf "+fcls+"\" style=\"width:"+pct+"%\"></div></div>"+
+    "<div style=\"font-size:11px;color:#8A7A6A;margin-top:4px\">"+d+" dias en lista"+(pt.pabellon?" - Pabellon: "+fmtD(pt.pabellon):"")+" </div></div></div>"+
+    "<div class=\"dsec\"><div class=\"dst\">Datos clinicos</div>"+
+    "<div class=\"dfl\"><span class=\"fll\">Ingreso lista</span><span class=\"flv\">"+fmtD(pt.fecha_ingreso)+"</span></div>"+
+    "<div class=\"dfl\"><span class=\"fll\">Pabellon</span><span class=\"flv\">"+(pt.pabellon?fmtD(pt.pabellon):"Sin programar")+"</span></div>"+
+    obs+"</div>"+
+    "<div class=\"dsec\"><div class=\"dst\">Checklist preoperatorio</div>"+clhtml+"</div>"+
+    "<div class=\"qrw\"><canvas id=\"qrc"+id+"\" width=\"80\" height=\"80\"></canvas>"+
+    "<div class=\"qru\">Dossier #"+String(id).padStart(4,"0")+"</div></div>"+
+    "</div>"+
+    "<div class=\"dftr\">"+btnPab+btnEdit+btnDel+"</div>";
+  setTimeout(function(){
+    var cv=document.getElementById("qrc"+id);
+    if(cv&&typeof QRCode!=="undefined")QRCode.toCanvas(cv,window.location.origin+"?dossier="+id,{width:80,margin:1,color:{dark:"#120F08",light:"#FDFAF4"}});
+  },60);
+}
+async function toggleItem(pid,g,idx){
+  if(!canEdit())return;
+  var pt=patients.find(function(x){return x.id===pid;});
+  if(!pt)return;
+  var item=pt.checklist[g][idx];
+  var nd=false,nn=false;
+  if(!item.done&&!item.na)nd=true;
+  else if(item.done)nn=true;
+  if(item.db_id){await sb.from("checklist_items").update({done:nd,na:nn}).eq("id",item.db_id);}
+  else{var res=await sb.from("checklist_items").insert({paciente_id:pid,grupo:g,label:item.label,done:nd,na:nn}).select().single();if(res.data)item.db_id=res.data.id;}
+  item.done=nd;item.na=nn;
+  openDet(pid);render();
+}
+async function savePat(){
+  if(!canEdit())return;
+  var nombre=document.getElementById("fn").value.trim();
+  if(!nombre){toast("El nombre es obligatorio","e");return;}
+  var pd={nombre:nombre,rut:document.getElementById("fr").value.trim(),edad:parseInt(document.getElementById("fe").value)||null,patologia:document.getElementById("fp").value,prioridad:document.getElementById("fpr").value,cie10:document.getElementById("fc10").value.trim(),fonasa:document.getElementById("ffon").value.trim(),fecha_ingreso:document.getElementById("fd").value||null,observaciones:document.getElementById("fo").value.trim()};
+  if(editId){
+    var old=patients.find(function(p){return p.id===editId;});
+    await sb.from("pacientes").update(pd).eq("id",editId);
+    if(old&&old.patologia!==pd.patologia){await sb.from("checklist_items").delete().eq("paciente_id",editId);await createCL(editId,pd.patologia);}
+    toast("Paciente actualizado","s");
+  }else{
+    var res=await sb.from("pacientes").insert(pd).select().single();
+    if(res.error){toast("Error al guardar","e");return;}
+    await createCL(res.data.id,pd.patologia);
+    toast("Paciente agregado","s");
   }
-  var icons = {heaven: '&#9728;', pending: '&#8987;', hell: '&#128293;'};
-  var labels = {heaven: 'Heaven', pending: 'Proceso', hell: 'Hell'};
-  var ptags = {P1: 't1', P2: 't2', P3: 't3'};
-  var html = '';
-  fil.forEach(function(p) {
-    var rm = getRealm(p), pct = calcProg(p), d = getDays(p);
-    html += '<div class="pc ' + rm + (selId === p.id ? ' sel' : '') + '" onclick="openDet(' + p.id + ')">';
-    html += '<div class="crlm"><div class="ric">' + icons[rm] + '</div><div class="rlb">' + labels[rm] + '</div></div>';
-    html += '<div class="cinf">';
-    html += '<div class="cnm">' + p.nombre + '</div>';
-    html += '<div class="cmt">';
-    html += '<span class="crt">' + (p.rut || '') + '</span>';
-    html += '<span class="tag tp">' + p.patologia + '</span>';
-    html += '<span class="tag ' + (ptags[p.prioridad] || '') + '">' + p.prioridad + '</span>';
-    html += '</div></div>';
-    html += '<div class="cpr"><div class="prp">' + pct + '%</div>';
-    html += '<div class="prbw"><div class="prbf f' + rm[0] + '" style="width:' + pct + '%"></div></div></div>';
-    html += '<div class="cdy"><div class="dyn">' + d + '</div><div class="dyl">dias</div></div>';
-    html += '</div>';
-  });
-  list.innerHTML = html;
+  cMo("mpat");await loadPats();
 }
-
-function openDet(id) {
-  selId = id; render();
-  var p = patients.find(function(x) { return x.id === id; });
-  if (!p) return;
-
-  var rm = getRealm(p), pct = calcProg(p), d = getDays(p);
-  var bncls = {heaven: 'bnh', pending: 'bnp', hell: 'bnl'}[rm];
-  var bntxt = {heaven: 'Carlo Heaven - Listo para pabellon', pending: 'En proceso - Completar checklist', hell: 'Nancy Hell - Sin preparacion'}[rm];
-  var fcc = {heaven: 'fh', pending: 'fp', hell: 'ff'}[rm];
-  var pcc = {heaven: '#C9A84C', pending: '#2563EB', hell: '#B82424'}[rm];
-  var gl = {lab: 'A. Laboratorio', imagenes: 'B. Imagenes', evaluaciones: 'C. Evaluaciones', docs: 'D. Documentacion'};
-  var ptags2 = {P1: 't1', P2: 't2', P3: 't3'};
-
-  var clhtml = '';
-  ['lab', 'imagenes', 'evaluaciones', 'docs'].forEach(function(g) {
-    var dc = 0, tc = 0;
-    p.checklist[g].forEach(function(i) { if (!i.na) { tc++; if (i.done) dc++; } });
-    clhtml += '<div class="clgt">' + gl[g] + ' (' + dc + '/' + tc + ')</div>';
-    p.checklist[g].forEach(function(it, idx) {
-      var st = it.na ? 'na' : (it.done ? 'done' : '');
-      var bx = it.done ? '&#10003;' : (it.na ? 'N/A' : '');
-      var clickAttr = canEdit() ? ' onclick="toggleItem(' + id + ',\'' + g + '\',' + idx + ')"' : '';
-      clhtml += '<div class="cli ' + st + '"' + clickAttr + '>';
-      clhtml += '<div class="clbx">' + bx + '</div>';
-      clhtml += '<div class="cllb">' + it.label + '</div>';
-      clhtml += '</div>';
-    });
-  });
-
-  var cie = p.cie10 ? '<span class="tag" style="background:#F0F4FF;color:#3B4ED8">' + p.cie10 + '</span>' : '';
-  var fon = p.fonasa ? '<span class="tag" style="background:#F5F0FF;color:#6B21A8">' + p.fonasa + '</span>' : '';
-  var obs = p.observaciones ? '<div class="dfl" style="flex-direction:column;gap:3px"><span class="fll">Observaciones</span><span style="font-size:12px;color:#3D3120;line-height:1.5">' + p.observaciones + '</span></div>' : '';
-  var btnPab = (rm === 'heaven' && canEdit()) ? '<button class="bf bp" onclick="scheduleOR(' + id + ')">Confirmar Pabellon Miercoles</button>' : '';
-  var btnEdit = canEdit() ? '<button class="bf bs" onclick="openEdit(' + id + ')">Editar datos</button>' : '';
-  var btnDel = role === 'admin' ? '<button class="bf bd" onclick="removePat(' + id + ')">Retirar de lista</button>' : '';
-  var diasTxt = d + ' dias en lista' + (p.pabellon ? ' - Pabellon: ' + fmtD(p.pabellon) : '');
-
-  document.getElementById('demp').style.display = 'none';
-  var dc2 = document.getElementById('dcont');
-  dc2.style.display = 'flex'; dc2.style.flexDirection = 'column';
-
-  var html = '';
-  html += '<div class="dhdr">';
-  html += '<div class="dbn ' + bncls + '">' + bntxt + '</div>';
-  html += '<div class="dnm">' + p.nombre + '</div>';
-  html += '<div class="drt">RUT ' + (p.rut || '--') + ' - ' + (p.edad || '--') + ' anos</div>';
-  html += '<div class="dtg"><span class="tag tp">' + p.patologia + '</span><span class="tag ' + (ptags2[p.prioridad] || '') + '">' + p.prioridad + '</span>' + cie + fon + '</div>';
-  html += '</div>';
-  html += '<div class="dbody">';
-  html += '<div class="dprg">';
-  html += '<div class="dpct" style="color:' + pcc + '">' + pct + '%</div>';
-  html += '<div style="flex:1">';
-  html += '<div style="font-size:9px;color:#8A7A6A;margin-bottom:4px">EXPEDIENTE</div>';
-  html += '<div class="dbw"><div class="dbf ' + fcc + '" style="width:' + pct + '%"></div></div>';
-  html += '<div style="font-size:11px;color:#8A7A6A;margin-top:4px">' + diasTxt + '</div>';
-  html += '</div></div>';
-  html += '<div class="dsec"><div class="dst">Datos clinicos</div>';
-  html += '<div class="dfl"><span class="fll">Ingreso lista</span><span class="flv">' + fmtD(p.fecha_ingreso) + '</span></div>';
-  html += '<div class="dfl"><span class="fll">Pabellon</span><span class="flv">' + (p.pabellon ? fmtD(p.pabellon) : 'Sin programar') + '</span></div>';
-  html += obs + '</div>';
-  html += '<div class="dsec"><div class="dst">Checklist preoperatorio</div>' + clhtml + '</div>';
-  html += '<div class="qrw"><canvas id="qrc' + id + '" width="80" height="80"></canvas><div class="qru">Dossier #' + String(id).padStart(4, '0') + '</div></div>';
-  html += '</div>';
-  html += '<div class="dftr">' + btnPab + btnEdit + btnDel + '</div>';
-
-  dc2.innerHTML = html;
-
-  setTimeout(function() {
-    var cv = document.getElementById('qrc' + id);
-    if (cv && typeof QRCode !== 'undefined') {
-      QRCode.toCanvas(cv, window.location.origin + '/?id=' + id, {width: 80, margin: 1, color: {dark: '#120F08', light: '#FDFAF4'}});
-    }
-  }, 60);
+async function createCL(pid,pat){
+  var t=CL[pat]||CL.AAA;var items=[];
+  ["lab","imagenes","evaluaciones","docs"].forEach(function(g){(t[g]||[]).forEach(function(label){items.push({paciente_id:pid,grupo:g,label:label,done:false,na:false});});});
+  await sb.from("checklist_items").insert(items);
 }
-
-async function toggleItem(pid, g, idx) {
-  if (!canEdit()) return;
-  var p = patients.find(function(x) { return x.id === pid; });
-  if (!p) return;
-  var item = p.checklist[g][idx];
-  var nd = false, nn = false;
-  if (!item.done && !item.na) nd = true;
-  else if (item.done) nn = true;
-  try {
-    if (item.db_id) {
-      await sb.from('checklist_items').update({done: nd, na: nn}).eq('id', item.db_id);
-    } else {
-      var res = await sb.from('checklist_items').insert({paciente_id: pid, grupo: g, label: item.label, done: nd, na: nn}).select().single();
-      if (res.data) item.db_id = res.data.id;
-    }
-    item.done = nd; item.na = nn;
-    openDet(pid); render();
-  } catch(e) { toast('Error al guardar', 'e'); }
+async function removePat(id){
+  if(role!=="admin"){toast("Solo el admin puede eliminar","e");return;}
+  if(!confirm("Retirar este paciente de la lista?"))return;
+  await sb.from("checklist_items").delete().eq("paciente_id",id);
+  await sb.from("pacientes").delete().eq("id",id);
+  selId=null;document.getElementById("demp").style.display="flex";document.getElementById("dcont").style.display="none";
+  toast("Paciente retirado","s");await loadPats();
 }
-
-async function savePat() {
-  if (!canEdit()) return;
-  var nombre = document.getElementById('fn').value.trim();
-  if (!nombre) { toast('El nombre es obligatorio', 'e'); return; }
-  var pd = {
-    nombre: nombre,
-    rut: document.getElementById('fr').value.trim(),
-    edad: parseInt(document.getElementById('fe').value) || null,
-    patologia: document.getElementById('fp').value,
-    prioridad: document.getElementById('fpr').value,
-    cie10: document.getElementById('fc10').value.trim(),
-    fonasa: document.getElementById('ffon').value.trim(),
-    fecha_ingreso: document.getElementById('fd').value || null,
-    observaciones: document.getElementById('fo').value.trim()
-  };
-  try {
-    if (editId) {
-      var old = patients.find(function(p) { return p.id === editId; });
-      await sb.from('pacientes').update(pd).eq('id', editId);
-      if (old && old.patologia !== pd.patologia) {
-        await sb.from('checklist_items').delete().eq('paciente_id', editId);
-        await createCL(editId, pd.patologia);
-      }
-      toast('Paciente actualizado', 's');
-    } else {
-      var res = await sb.from('pacientes').insert(pd).select().single();
-      if (res.error) { toast('Error al guardar', 'e'); return; }
-      await createCL(res.data.id, pd.patologia);
-      toast('Paciente agregado', 's');
-    }
-    cMo('mpat'); await loadPats();
-  } catch(e) { toast('Error al guardar', 'e'); }
+async function scheduleOR(id){
+  if(!canEdit())return;
+  var d=new Date();var day=d.getDay();var diff=(3-day+7)%7||7;d.setDate(d.getDate()+diff);
+  var ds=d.toISOString().split("T")[0];
+  await sb.from("pacientes").update({pabellon:ds}).eq("id",id);
+  var pt=patients.find(function(x){return x.id===id;});if(pt)pt.pabellon=ds;
+  openDet(id);toast("Programado para el "+fmtD(ds),"s");
 }
-
-async function createCL(pid, pat) {
-  var t = CL[pat] || CL.AAA;
-  var items = [];
-  ['lab', 'imagenes', 'evaluaciones', 'docs'].forEach(function(g) {
-    (t[g] || []).forEach(function(label) {
-      items.push({paciente_id: pid, grupo: g, label: label, done: false, na: false});
-    });
-  });
-  await sb.from('checklist_items').insert(items);
+async function openTeam(){
+  if(role!=="admin")return;
+  document.getElementById("mteam").classList.add("on");
+  var res=await sb.from("user_roles").select("*");
+  var rows=(res.data||[]).map(function(u){
+    var rclass="r"+((u.role||"r")[0]);
+    var action=u.user_id===cu.id?"<span style=\"font-size:11px;color:#8A7A6A\">Tu</span>":"<button class=\"brev\" onclick=\"revokeUser('"+u.user_id+"')\">Revocar</button>";
+    return "<tr><td>"+(u.email||u.user_id)+"</td><td><span class=\"rb "+rclass+"\">"+u.role+"</span></td><td>"+action+"</td></tr>";
+  }).join("");
+  document.getElementById("utbl").innerHTML=rows?"<table class=\"ut\"><thead><tr><th>Email</th><th>Rol</th><th>Accion</th></tr></thead><tbody>"+rows+"</tbody></table>":"<p style=\"font-size:13px;color:#8A7A6A\">Solo estas tu en el equipo.</p>";
 }
-
-async function removePat(id) {
-  if (role !== 'admin') { toast('Solo el admin puede eliminar', 'e'); return; }
-  if (!confirm('Retirar este paciente de la lista?')) return;
-  await sb.from('checklist_items').delete().eq('paciente_id', id);
-  await sb.from('pacientes').delete().eq('id', id);
-  selId = null;
-  document.getElementById('demp').style.display = 'flex';
-  document.getElementById('dcont').style.display = 'none';
-  toast('Paciente retirado', 's');
-  await loadPats();
-}
-
-async function scheduleOR(id) {
-  if (!canEdit()) return;
-  var d = new Date();
-  var day = d.getDay();
-  var diff = (3 - day + 7) % 7 || 7;
-  d.setDate(d.getDate() + diff);
-  var ds = d.toISOString().split('T')[0];
-  await sb.from('pacientes').update({pabellon: ds}).eq('id', id);
-  var p = patients.find(function(x) { return x.id === id; });
-  if (p) p.pabellon = ds;
-  openDet(id);
-  toast('Programado para el ' + fmtD(ds), 's');
-}
-
-async function openTeam() {
-  if (role !== 'admin') return;
-  document.getElementById('mteam').classList.add('on');
-  try {
-    var res = await sb.from('user_roles').select('*');
-    var rows = (res.data || []).map(function(u) {
-      var roleClass = 'r' + ((u.role || 'r')[0]);
-      var action = u.user_id === cu.id
-        ? '<span style="font-size:11px;color:#8A7A6A">Tu</span>'
-        : '<button class="brev" onclick="revokeUser(\'' + u.user_id + '\')">Revocar</button>';
-      return '<tr><td>' + (u.email || u.user_id) + '</td><td><span class="rb ' + roleClass + '">' + u.role + '</span></td><td>' + action + '</td></tr>';
-    }).join('');
-    document.getElementById('utbl').innerHTML = rows
-      ? '<table class="ut"><thead><tr><th>Email</th><th>Rol</th><th>Accion</th></tr></thead><tbody>' + rows + '</tbody></table>'
-      : '<p style="font-size:13px;color:#8A7A6A">Solo estas tu en el equipo.</p>';
-  } catch(e) { document.getElementById('utbl').innerHTML = '<p style="color:#B82424;font-size:13px">Error cargando usuarios</p>'; }
-}
-
-async function inviteUser() {
-  var email = document.getElementById('ie').value.trim();
-  var r = document.getElementById('ir').value;
-  if (!email) { toast('Ingresa el email del colega', 'e'); return; }
-  await sb.from('user_roles').upsert({email: email, role: r, invited_by: cu.id}, {onConflict: 'email'});
-  toast('Invitacion registrada para ' + email, 's');
-  document.getElementById('ie').value = '';
+async function inviteUser(){
+  var email=document.getElementById("ie").value.trim();
+  var r=document.getElementById("ir").value;
+  if(!email){toast("Ingresa el email del colega","e");return;}
+  await sb.from("user_roles").upsert({email:email,role:r,invited_by:cu.id},{onConflict:"email"});
+  toast("Invitacion registrada para "+email,"s");
+  document.getElementById("ie").value="";
   openTeam();
 }
-
-async function revokeUser(uid) {
-  if (!confirm('Revocar acceso a este usuario?')) return;
-  await sb.from('user_roles').delete().eq('user_id', uid);
-  toast('Acceso revocado', 's');
-  openTeam();
+async function revokeUser(uid){
+  if(!confirm("Revocar acceso?"))return;
+  await sb.from("user_roles").delete().eq("user_id",uid);
+  toast("Acceso revocado","s");openTeam();
 }
-
-function openModal() {
-  editId = null;
-  document.getElementById('mtt').textContent = 'Nuevo Paciente';
-  document.getElementById('mpsv').onclick = savePat;
-  document.getElementById('fd').value = new Date().toISOString().split('T')[0];
-  ['fn', 'fr', 'fe', 'fc10', 'ffon', 'fo'].forEach(function(id) { document.getElementById(id).value = ''; });
-  document.getElementById('fp').value = 'AAA';
-  document.getElementById('fpr').value = 'P1';
-  document.getElementById('mpat').classList.add('on');
-}
-
-function openEdit(id) {
+function openModal(){editId=null;document.getElementById("mtt").textContent="Nuevo Paciente";document.getElementById("mpsv").onclick=savePat;document.getElementById("fd").value=new Date().toISOString().split("T")[0];["fn","fr","fe","fc10","ffon","fo"].forEach(function(id){document.getElementById(id).value="";});document.getElementById("fp").value="AAA";document.getElementById("fpr").value="P1";document.getElementById("mpat").classList.add("on");}
+function openEdit(id){var pt=patients.find(function(x){return x.id===id;});if(!pt)return;editId=id;document.getElementById("mtt").textContent="Editar Paciente";document.getElementById("mpsv").onclick=savePat;document.getElementById("fn").value=pt.nombre||"";document.getElementById("fr").value=pt.rut||"";document.getElementById("fe").value=pt.edad||"";document.getElementById("fp").value=pt.patologia||"AAA";document.getElementById("fpr").value=pt.prioridad||"P1";document.getElementById("fc10").value=pt.cie10||"";document.getElementById("ffon").value=pt.fonasa||"";document.getElementById("fd").value=pt.fecha_ingreso||"";document.getElementById("fo").value=pt.observaciones||"";document.getElementById("mpat").classList.add("on");}
+function cMo(id){document.getElementById(id).classList.remove("on");}
+document.querySelectorAll(".mo").forEach(function(o){o.addEventListener("click",function(e){if(e.target===o)o.classList.remove("on");});});
+document.addEventListener("keydown",function(e){if(e.key==="Enter"&&document.getElementById("login").classList.contains("on"))doLogin();});
+function toast(m,t){var el=document.getElementById("tst");el.textContent=m;el.className="tst on "+(t||"");setTimeout(function(){el.classList.remove("on");},3500);}
+async function toggleTopon(id) {
+  if (!canEdit()) return;
   var p = patients.find(function(x) { return x.id === id; });
   if (!p) return;
-  editId = id;
-  document.getElementById('mtt').textContent = 'Editar Paciente';
-  document.getElementById('mpsv').onclick = savePat;
-  document.getElementById('fn').value = p.nombre || '';
-  document.getElementById('fr').value = p.rut || '';
-  document.getElementById('fe').value = p.edad || '';
-  document.getElementById('fp').value = p.patologia || 'AAA';
-  document.getElementById('fpr').value = p.prioridad || 'P1';
-  document.getElementById('fc10').value = p.cie10 || '';
-  document.getElementById('ffon').value = p.fonasa || '';
-  document.getElementById('fd').value = p.fecha_ingreso || '';
-  document.getElementById('fo').value = p.observaciones || '';
-  document.getElementById('mpat').classList.add('on');
-}
-
-function cMo(id) { document.getElementById(id).classList.remove('on'); }
-
-document.querySelectorAll('.mo').forEach(function(o) {
-  o.addEventListener('click', function(e) { if (e.target === o) o.classList.remove('on'); });
-});
-
-document.addEventListener('keydown', function(e) {
-  if (e.key === 'Enter' && document.getElementById('login').classList.contains('on')) doLogin();
-});
-
-function toast(m, t) {
-  var el = document.getElementById('tst');
-  el.textContent = m;
-  el.className = 'tst on ' + (t || '');
-  setTimeout(function() { el.classList.remove('on'); }, 3500);
+  var newVal = !p.topon;
+  var email = cu ? cu.email : '';
+  await sb.from('pacientes').update({
+    topon: newVal,
+    topon_by: newVal ? email : null,
+    topon_at: newVal ? new Date().toISOString() : null
+  }).eq('id', id);
+  p.topon = newVal;
+  p.topon_by = newVal ? email : null;
+  openDet(id); render();
+  toast(newVal ? 'TOPON PA\' DENTRO confirmado' : 'Topon retirado', newVal ? 's' : '');
 }
 
 init();
