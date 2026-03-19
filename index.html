@@ -433,7 +433,7 @@ function openDet(id){
     "<div class=\"qrw\"><canvas id=\"qrc"+id+"\" width=\"80\" height=\"80\"></canvas>"+
     "<div class=\"qru\">Dossier #"+String(id).padStart(4,"0")+"</div></div>"+
     "</div>"+
-    "<div class=\"dftr\">"+btnPab+btnEdit+btnDel+"</div>";
+    "<div class=\"dftr\">"+btnTopon+btnPab+btnEdit+btnDel+"</div>";
   setTimeout(function(){
     var cv=document.getElementById("qrc"+id);
     if(cv&&typeof QRCode!=="undefined")QRCode.toCanvas(cv,window.location.origin+"?dossier="+id,{width:80,margin:1,color:{dark:"#120F08",light:"#FDFAF4"}});
