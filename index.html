@@ -157,6 +157,54 @@ textarea.fgc{resize:vertical;min-height:55px;}
 ::-webkit-scrollbar{width:4px;}::-webkit-scrollbar-thumb{background:#D0C8B8;border-radius:99px;}
 .tst{position:fixed;bottom:20px;right:20px;z-index:9999;background:#120F08;color:#fff;padding:11px 16px;border-radius:9px;font-size:13px;box-shadow:0 8px 24px rgba(0,0,0,.3);display:none;}
 .tst.on{display:block;}.tst.s{background:#166534;}.tst.e{background:#6B0F0F;}
+
+/* ── CHECKLIST V2 ─── */
+.clv2-item { border-bottom: 1px solid #F0EDE8; }
+.clv2-item:last-child { border-bottom: none; }
+.clv2-main { display: flex; align-items: center; gap: 9px; padding: 9px 6px; cursor: pointer; border-radius: 6px; }
+.clv2-main:hover { background: #F8F6F2; }
+.clv2-box { width: 20px; height: 20px; border-radius: 4px; border: 2px solid #D0C8B8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 11px; transition: all .12s; }
+.clv2-box.done { background: #C9A84C; border-color: #C9A84C; color: #fff; }
+.clv2-box.pend { background: #EFF6FF; border-color: #2563EB; color: #2563EB; font-size: 9px; font-family: DM Mono,monospace; font-weight: 700; }
+.clv2-lbl { font-family: Instrument Sans,sans-serif; font-size: 13px; color: #3D3120; flex: 1; }
+.clv2-arrow { font-size: 10px; color: #CCC; transition: transform .15s; }
+.clv2-arrow.open { transform: rotate(90deg); }
+.clv2-sub { display: none; padding: 0 0 6px 28px; }
+.clv2-sub.open { display: block; }
+.clv2-sub-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 4px; border-radius: 5px; cursor: pointer; }
+.clv2-sub-item:hover { background: #F8F6F2; }
+.clv2-sub-box { width: 16px; height: 16px; border-radius: 3px; border: 2px solid #D0C8B8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 9px; margin-top: 2px; transition: all .12s; }
+.clv2-sub-box.done { background: #C9A84C; border-color: #C9A84C; color: #fff; }
+.clv2-sub-box.pend { background: #EFF6FF; border-color: #2563EB; color: #2563EB; font-family: DM Mono,monospace; font-weight: 700; font-size: 7px; }
+.clv2-sub-right { flex: 1; }
+.clv2-sub-lbl { font-family: Instrument Sans,sans-serif; font-size: 12px; color: #3D3120; }
+.clv2-sub-txt { width: 100%; margin-top: 5px; background: #F8F6F2; border: 1px solid #E8DCC8; border-radius: 5px; padding: 5px 8px; font-family: Instrument Sans,sans-serif; font-size: 12px; color: #120F08; outline: none; resize: none; height: 52px; }
+.clv2-sub-txt:focus { border-color: #120F08; }
+/* ── CALENDAR ─── */
+.cal-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.cal-nav-btn { background: #fff; border: 1px solid #E8DCC8; border-radius: 6px; padding: 5px 12px; cursor: pointer; font-size: 14px; color: #120F08; }
+.cal-month { font-family: Playfair Display,serif; font-size: 18px; font-weight: 700; color: #120F08; }
+.cal-grid { display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px; }
+.cal-dow { font-family: DM Mono,monospace; font-size: 9px; letter-spacing: 1px; text-transform: uppercase; color: #8A7A6A; text-align: center; padding: 4px 0; }
+.cal-day { min-height: 80px; background: #fff; border: 1px solid #F0EDE8; border-radius: 6px; padding: 5px 4px; }
+.cal-day.other-month { background: #FDFAF4; opacity: .4; }
+.cal-day.today { border-color: #C9A84C; }
+.cal-day.pabellon-abierto { border-top: 3px solid #16A34A; }
+.cal-day.pabellon-endovascular { border-top: 3px solid #2563EB; }
+.cal-day.hemodinamia { border-top: 3px solid #9333EA; }
+.cal-day-num { font-family: DM Mono,monospace; font-size: 11px; color: #8A7A6A; margin-bottom: 3px; }
+.cal-day.today .cal-day-num { color: #C9A84C; font-weight: 700; }
+.cal-pat-chip { border-radius: 3px; padding: 1px 4px; font-family: DM Mono,monospace; font-size: 8px; margin-bottom: 2px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; cursor: pointer; display: block; }
+.cal-pat-chip.heaven { background: #C9A84C; color: #120F08; }
+.cal-pat-chip.pending { background: #2563EB; color: #fff; }
+.cal-pat-chip.hell { background: #B82424; color: #fff; }
+.cal-pat-chip.default { background: #1C1810; color: #fff; }
+.cal-legend { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 10px; }
+.cal-leg-item { display: flex; align-items: center; gap: 5px; font-family: DM Mono,monospace; font-size: 9px; color: #8A7A6A; letter-spacing: 1px; }
+.cal-leg-dot { width: 8px; height: 8px; border-radius: 2px; flex-shrink: 0; }
+.date-modal-ov { display: none; position: fixed; inset: 0; background: rgba(10,8,4,.5); z-index: 2000; align-items: center; justify-content: center; }
+.date-modal-ov.on { display: flex; }
+.date-modal { background: #fff; border-radius: 14px; padding: 24px; width: 320px; box-shadow: 0 20px 60px rgba(0,0,0,.25); }
 </style>
 </head>
 <body>
@@ -209,12 +257,12 @@ textarea.fgc{resize:vertical;min-height:55px;}
 </div></aside>
 <main>
 <div class="mhdr"><div><div class="vt">Lista de Espera</div><div style="font-size:9px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Cirugia Vascular - HGF</div></div>
-<div class="srtbs">
+<div style="display:flex;gap:8px;align-items:center;"><button class="sort-btn" onclick="switchMainView('cal')" style="font-size:11px;">&#128197; Calendario</button><button class="sort-btn" onclick="switchMainView('list')" style="font-size:11px;">Lista</button><div class="srtbs">
 <button class="srtb on" onclick="setS('dias',this)">Dias</button>
 <button class="srtb" onclick="setS('prio',this)">Prioridad</button>
 <button class="srtb" onclick="setS('prog',this)">Progreso</button>
 <button class="srtb" onclick="setS('nom',this)">Nombre</button>
-</div></div>
+</div></div></div>
 <div class="plist" id="plist"></div>
 </main>
 <aside class="det" id="dpanel">
@@ -253,8 +301,59 @@ textarea.fgc{resize:vertical;min-height:55px;}
 </div>
 <div class="mft"><button class="mb mbc" onclick="cMo('mteam')">Cerrar</button></div>
 </div></div>
+<!-- CALENDAR VIEW -->
+<div id="cal-view" style="display:none;overflow-y:auto;padding:18px;background:var(--bg);">
+  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+    <div><div class="vt">Calendario de Pabellon</div><div style="font-family:'DM Mono',monospace;font-size:9px;color:#8A7A6A;letter-spacing:1px;text-transform:uppercase;margin-top:2px">Programacion mensual</div></div>
+  </div>
+  <div class="cal-nav">
+    <button class="cal-nav-btn" onclick="calPrev()">&#8592;</button>
+    <div class="cal-month" id="cal-month-lbl"></div>
+    <button class="cal-nav-btn" onclick="calNext()">&#8594;</button>
+  </div>
+  <div class="cal-grid" id="cal-grid"></div>
+  <div class="cal-legend" style="margin-top:10px;">
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#16A34A"></div>Pabellon abierto (Mierc)</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#2563EB"></div>Endovascular (Jueves)</div>
+    <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#9333EA"></div>Hemodinamia (Lun/Mar/Vie)</div>
+  </div>
+</div>
+
+<!-- DATE MODAL -->
+<div class="date-modal-ov" id="date-modal-ov" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="date-modal">
+    <div style="font-family:'Playfair Display',serif;font-size:17px;font-weight:700;margin-bottom:10px">Programar Pabellon</div>
+    <div style="font-size:13px;color:#8A7A6A;margin-bottom:14px" id="date-pat-name"></div>
+    <input type="hidden" id="date-pat-id">
+    <div class="fgrp"><label class="fgl">Fecha de pabellon</label><input type="date" class="fgc" id="date-input"></div>
+    <div style="display:flex;gap:10px;margin-top:14px;justify-content:flex-end;">
+      <button class="mb mbc" onclick="document.getElementById('date-modal-ov').classList.remove('on')">Cancelar</button>
+      <button class="mb mbs" onclick="confirmDateModal()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
 <div class="tst" id="tst"></div>
 <script>
+var CL_V2={lab:{label:"Examenes de laboratorio",type:"simple"},ekg:{label:"EKG",type:"simple"},eco:{label:"Ecocardiograma",type:"simple"},imagenes:{label:"Imagenes",type:"expandable",subs:[{key:"angiotc",label:"AngioTC"},{key:"dopcarot",label:"Eco doppler carotideo"},{key:"angiografia",label:"Angiografia"},{key:"dopven",label:"Eco doppler venoso"}]},interconsultas:{label:"Interconsultas",type:"expandable",subs:[{key:"anestesia",label:"Anestesia",ic:true},{key:"cardiologia",label:"Cardiologia",ic:true},{key:"nefrologia",label:"Nefrologia",ic:true},{key:"bronco",label:"Broncopulmonar",ic:true},{key:"otras",label:"Otras",ic:true,freetext:true}]},consentimiento:{label:"Consentimiento informado",type:"simple"},caprini:{label:"Caprini",type:"simple"},ingreso:{label:"Ingreso medico",type:"simple"}};
+var CL_ORDER=["lab","ekg","eco","imagenes","interconsultas","consentimiento","caprini","ingreso"];
+function makeEmptyV2(){var r={};CL_ORDER.forEach(function(k){var def=CL_V2[k];if(def.type==="simple"){r[k]={done:false};}else{r[k]={open:false,subs:{}};(def.subs||[]).forEach(function(s){r[k].subs[s.key]={state:"off",note:""};});}});return r;}
+function calcProgV2b(clv2){if(!clv2)return 0;var total=0,done=0;CL_ORDER.forEach(function(k){var def=CL_V2[k];if(def.type==="simple"){total++;if(clv2[k]&&clv2[k].done)done++;}else{(def.subs||[]).forEach(function(s){total++;if(clv2[k]&&clv2[k].subs&&clv2[k].subs[s.key]&&clv2[k].subs[s.key].state==="done")done++;});}});return total===0?0:Math.round(done/total*100);}
+function renderChecklistV2b(pt,editable){var clv2=pt.checklist_v2&&Object.keys(pt.checklist_v2).length>0?pt.checklist_v2:makeEmptyV2();var html="";CL_ORDER.forEach(function(k){var def=CL_V2[k];var itemData=clv2[k]||{};html+='<div class="clv2-item">';if(def.type==="simple"){var isDone=itemData.done;var ca=editable?'onclick="toggleV2Simple('+pt.id+',' + "'"+k+"'" + ')"':'';html+='<div class="clv2-main" '+ca+'><div class="clv2-box '+(isDone?'done':'')+'">'+(isDone?'&#10003;':'')+' </div><div class="clv2-lbl">'+def.label+'</div></div>';}else{var subs=itemData.subs||{};var dc=0;(def.subs||[]).forEach(function(s){if(subs[s.key]&&subs[s.key].state==="done")dc++;});var hasAny=Object.values(subs).some(function(v){return v&&v.state!=="off";});var isOpen=itemData.open;var ca=editable?'onclick="toggleV2Expand('+pt.id+',' + "'"+k+"'" + ')"':'';html+='<div class="clv2-main" '+ca+'><div class="clv2-box '+(hasAny?'done':'')+'">'+(hasAny?'&#10003;':'')+' </div><div class="clv2-lbl">'+def.label+' <span style="font-size:10px;color:#8A7A6A">('+dc+'/'+(def.subs||[]).length+')</span></div><div class="clv2-arrow '+(isOpen?'open':'')+' ">&#9654;</div></div>';html+='<div class="clv2-sub '+(isOpen?'open':'')+'" id="clv2sub-'+pt.id+'-'+k+'">';(def.subs||[]).forEach(function(s){var sub=subs[s.key]||{state:"off",note:""};var cls=sub.state==="done"?"done":(sub.state==="pend"?"pend":"");var bx=sub.state==="done"?"&#10003;":(sub.state==="pend"?"P":" ");var cs=editable?'onclick="toggleV2Sub('+pt.id+',' + "'"+k+"','"+s.key+"'" + ')"':'';html+='<div class="clv2-sub-item"><div class="clv2-sub-box '+cls+'" '+cs+'>'+bx+'</div><div class="clv2-sub-right"><div class="clv2-sub-lbl">'+s.label+'</div>';if(sub.state!=="off"||s.freetext){var nid="clv2note-"+pt.id+"-"+k+"-"+s.key;var ba=editable?'onblur="saveV2Note('+pt.id+',' + "'"+k+"','"+s.key+"'" + ',this.value)"':'readonly';html+='<textarea class="clv2-sub-txt" id="'+nid+'" placeholder="Detalle..." '+ba+'>'+( sub.note||'')+'</textarea>';}html+='</div></div>';});html+='</div>';}html+='</div>';});return html;}
+async function toggleV2Simple(pid,key){if(!canEdit())return;var pt=patients.find(function(x){return x.id===pid;});if(!pt)return;if(!pt.checklist_v2||Object.keys(pt.checklist_v2).length===0)pt.checklist_v2=makeEmptyV2();if(!pt.checklist_v2[key])pt.checklist_v2[key]={done:false};pt.checklist_v2[key].done=!pt.checklist_v2[key].done;await saveV2(pid,pt.checklist_v2);openDet(pid);render();}
+async function toggleV2Expand(pid,key){var pt=patients.find(function(x){return x.id===pid;});if(!pt)return;if(!pt.checklist_v2||Object.keys(pt.checklist_v2).length===0)pt.checklist_v2=makeEmptyV2();if(!pt.checklist_v2[key])pt.checklist_v2[key]={open:false,subs:{}};pt.checklist_v2[key].open=!pt.checklist_v2[key].open;var subDiv=document.getElementById("clv2sub-"+pid+"-"+key);if(subDiv){subDiv.classList.toggle("open");var prev=subDiv.previousElementSibling;if(prev){var arr=prev.querySelector(".clv2-arrow");if(arr)arr.classList.toggle("open");}}}
+async function toggleV2Sub(pid,key,subkey){if(!canEdit())return;var pt=patients.find(function(x){return x.id===pid;});if(!pt)return;if(!pt.checklist_v2||Object.keys(pt.checklist_v2).length===0)pt.checklist_v2=makeEmptyV2();if(!pt.checklist_v2[key])pt.checklist_v2[key]={open:true,subs:{}};if(!pt.checklist_v2[key].subs)pt.checklist_v2[key].subs={};var cur=pt.checklist_v2[key].subs[subkey]?pt.checklist_v2[key].subs[subkey].state:"off";var next=cur==="off"?"pend":(cur==="pend"?"done":"off");if(!pt.checklist_v2[key].subs[subkey])pt.checklist_v2[key].subs[subkey]={state:"off",note:""};pt.checklist_v2[key].subs[subkey].state=next;await saveV2(pid,pt.checklist_v2);openDet(pid);render();}
+async function saveV2Note(pid,key,subkey,val){var pt=patients.find(function(x){return x.id===pid;});if(!pt||!pt.checklist_v2||!pt.checklist_v2[key]||!pt.checklist_v2[key].subs)return;if(!pt.checklist_v2[key].subs[subkey])pt.checklist_v2[key].subs[subkey]={state:"off",note:""};pt.checklist_v2[key].subs[subkey].note=val;await saveV2(pid,pt.checklist_v2);}
+async function saveV2(pid,clv2){await sb.from("pacientes").update({checklist_v2:clv2}).eq("id",pid);}
+var calYear=new Date().getFullYear();
+var calMonth=new Date().getMonth();
+function switchMainView(view){var mainEl=document.querySelector("main");var calEl=document.getElementById("cal-view");if(view==="cal"){if(mainEl)mainEl.style.display="none";calEl.style.display="block";renderCalendar();}else{if(mainEl)mainEl.style.display="";calEl.style.display="none";}}
+function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();}
+function renderCalendar(){var months=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];var dows=["Dom","Lun","Mar","Mie","Jue","Vie","Sab"];document.getElementById("cal-month-lbl").textContent=months[calMonth]+" "+calYear;var firstDay=new Date(calYear,calMonth,1).getDay();var daysInMonth=new Date(calYear,calMonth+1,0).getDate();var today=new Date();var byDate={};patients.forEach(function(p){if(p.pabellon){var k=p.pabellon.substring(0,10);if(!byDate[k])byDate[k]=[];byDate[k].push(p);}});var html="";dows.forEach(function(d){html+='<div class="cal-dow">'+d+"</div>";});for(var i=0;i<firstDay;i++)html+='<div class="cal-day other-month"></div>';for(var day=1;day<=daysInMonth;day++){var date=new Date(calYear,calMonth,day);var dow=date.getDay();var ds=calYear+"-"+String(calMonth+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");var isToday=today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===day;var dcls="cal-day"+(isToday?" today":"");if(dow===3)dcls+=" pabellon-abierto";else if(dow===4)dcls+=" pabellon-endovascular";else if(dow===1||dow===2||dow===5)dcls+=" hemodinamia";var chips="";if(byDate[ds]){byDate[ds].slice(0,3).forEach(function(p){var rm=getRealm(p);chips+='<span class="cal-pat-chip '+rm+'" onclick="openDet('+p.id+')" title="'+p.nombre+'">'+p.nombre.split(",")[0]+"</span>";});if(byDate[ds].length>3)chips+='<span style="font-size:8px;color:#8A7A6A">+'+(byDate[ds].length-3)+" mas</span>";}html+='<div class="'+dcls+'"><div class="cal-day-num">'+day+"</div>"+chips+"</div>";}document.getElementById("cal-grid").innerHTML=html;}
+function scheduleORModal(id){var pt=patients.find(function(x){return x.id===id;});if(!pt)return;document.getElementById("date-pat-name").textContent=pt.nombre;document.getElementById("date-input").value=pt.pabellon||new Date().toISOString().split("T")[0];document.getElementById("date-pat-id").value=id;document.getElementById("date-modal-ov").classList.add("on");}
+async function confirmDateModal(){var id=parseInt(document.getElementById("date-pat-id").value);var ds=document.getElementById("date-input").value;if(!ds)return;await sb.from("pacientes").update({pabellon:ds}).eq("id",id);var pt=patients.find(function(x){return x.id===id;});if(pt)pt.pabellon=ds;document.getElementById("date-modal-ov").classList.remove("on");openDet(id);render();if(document.getElementById("cal-view").style.display!=="none")renderCalendar();toast("Pabellon: "+fmtD(ds),"s");}
+
 var SURL="https://prdbmwwxyvialtfcatsc.supabase.co";
 var SKEY="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByZGJtd3d4eXZpYWx0ZmNhdHNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4ODY4OTMsImV4cCI6MjA4OTQ2Mjg5M30.uMHiDGS0rVB9aS2IUj0PnBdRHdGP-UVIDtKfp-XuxzA";
 var sb=supabase.createClient(SURL,SKEY);
@@ -323,7 +422,7 @@ function buildCL(pat,items){
   });
   return result;
 }
-function calcProg(p){var t=0,d=0;["lab","imagenes","evaluaciones","docs"].forEach(function(g){p.checklist[g].forEach(function(i){if(!i.na){t++;if(i.done)d++;}});});return t===0?100:Math.round(d/t*100);}
+function calcProg(p){ if(p.checklist_v2&&Object.keys(p.checklist_v2).length>0) return calcProgV2b(p.checklist_v2);var t=0,d=0;["lab","imagenes","evaluaciones","docs"].forEach(function(g){p.checklist[g].forEach(function(i){if(!i.na){t++;if(i.done)d++;}});});return t===0?100:Math.round(d/t*100);}
 function getRealm(p){if(p.topon)return "heaven";var pct=calcProg(p);return pct===100?"heaven":pct===0?"hell":"pending";}
 function getDays(p){return Math.floor((new Date()-new Date(p.fecha_ingreso||p.created_at))/86400000);}
 function fmtD(s){if(!s)return "--";return new Date(s+"T12:00:00").toLocaleDateString("es-CL",{day:"numeric",month:"long",year:"numeric"});}
@@ -407,7 +506,7 @@ function openDet(id){
   var cie=pt.cie10?"<span class=\"tag\" style=\"background:#F0F4FF;color:#3B4ED8\">"+pt.cie10+"</span>":"";
   var fon=pt.fonasa?"<span class=\"tag\" style=\"background:#F5F0FF;color:#6B21A8\">"+pt.fonasa+"</span>":"";
   var obs=pt.observaciones?"<div class=\"dfl\" style=\"flex-direction:column;gap:3px\"><span class=\"fll\">Observaciones</span><span style=\"font-size:12px;color:#3D3120;line-height:1.5\">"+pt.observaciones+"</span></div>":"";
-  var btnTopon=canEdit()?"<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:"+(pt.topon?"#16A34A":"#120F08")+";color:#fff;\" onclick=\"toggleTopon("+id+")\">"+(pt.topon?"OK TOPON PA DENTRO":"TOPON PA DENTRO")+"</button>":""; var btnPab=rm==="heaven"&&canEdit()?"<button class=\"bf bp\" onclick=\"scheduleOR("+id+")\">Confirmar Pabellon Miercoles</button>":"";
+  var btnTopon=canEdit()?"<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:"+(pt.topon?"#16A34A":"#120F08")+";color:#fff;\" onclick=\"toggleTopon("+id+")\">"+(pt.topon?"OK TOPON PA DENTRO":"TOPON PA DENTRO")+"</button>":""; var btnPab=canEdit()?"<button class=\"bf bp\" onclick=\"scheduleORModal("+id+")\">"+(pt.pabellon?"&#128197; Reprogramar Pabellon":"&#128197; Programar Pabellon")+"</button>":"";
   var btnEdit=canEdit()?"<button class=\"bf bs\" onclick=\"openEdit("+id+")\">Editar datos</button>":"";
   var btnDel=role==="admin"?"<button class=\"bf bd\" onclick=\"removePat("+id+")\">Retirar de lista</button>":"";
   document.getElementById("demp").style.display="none";
@@ -429,7 +528,7 @@ function openDet(id){
     "<div class=\"dfl\"><span class=\"fll\">Ingreso lista</span><span class=\"flv\">"+fmtD(pt.fecha_ingreso)+"</span></div>"+
     "<div class=\"dfl\"><span class=\"fll\">Pabellon</span><span class=\"flv\">"+(pt.pabellon?fmtD(pt.pabellon):"Sin programar")+"</span></div>"+
     obs+"</div>"+
-    "<div class=\"dsec\"><div class=\"dst\">Checklist preoperatorio</div>"+clhtml+"</div>"+
+    "<div class=\"dsec\"><div class=\"dst\">Checklist preoperatorio</div>"+renderChecklistV2b(pt,canEdit())+"</div>"+
     "<div class=\"qrw\"><canvas id=\"qrc"+id+"\" width=\"80\" height=\"80\"></canvas>"+
     "<div class=\"qru\">Dossier #"+String(id).padStart(4,"0")+"</div></div>"+
     "</div>"+
