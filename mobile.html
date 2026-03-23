@@ -252,6 +252,57 @@ textarea.fgc { resize: none; height: 75px; }
 .tst.on { display: block; }
 .tst.s { background: #166534; }
 .tst.e { background: var(--red-dk); }
+
+.clv2-item { border-bottom: 1px solid #F0EDE8; }
+.clv2-item:last-child { border-bottom: none; }
+.clv2-main { display: flex; align-items: center; gap: 9px; padding: 10px 6px; cursor: pointer; border-radius: 6px; }
+.clv2-main:active { background: #F8F6F2; }
+.clv2-box { width: 22px; height: 22px; border-radius: 5px; border: 2px solid #D0C8B8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; }
+.clv2-box.done { background: #C9A84C; border-color: #C9A84C; color: #fff; }
+.clv2-box.pend { background: #EFF6FF; border-color: #2563EB; color: #2563EB; font-size: 9px; font-weight: 700; }
+.clv2-lbl { font-family: Instrument Sans,sans-serif; font-size: 14px; color: #3D3120; flex: 1; }
+.clv2-arrow { font-size: 11px; color: #CCC; transition: transform .15s; }
+.clv2-arrow.open { transform: rotate(90deg); }
+.clv2-sub { display: none; padding: 0 0 8px 30px; }
+.clv2-sub.open { display: block; }
+.clv2-sub-item { display: flex; align-items: flex-start; gap: 9px; padding: 8px 4px; border-radius: 5px; }
+.clv2-sub-item:active { background: #F8F6F2; }
+.clv2-sub-box { width: 20px; height: 20px; border-radius: 4px; border: 2px solid #D0C8B8; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 10px; margin-top: 2px; }
+.clv2-sub-box.done { background: #C9A84C; border-color: #C9A84C; color: #fff; }
+.clv2-sub-box.pend { background: #EFF6FF; border-color: #2563EB; color: #2563EB; font-weight: 700; font-size: 8px; }
+.clv2-sub-right { flex: 1; }
+.clv2-sub-lbl { font-family: Instrument Sans,sans-serif; font-size: 13px; color: #3D3120; }
+.clv2-sub-txt { width: 100%; margin-top: 6px; background: #F8F6F2; border: 1px solid #E8DCC8; border-radius: 6px; padding: 6px 10px; font-family: Instrument Sans,sans-serif; font-size: 13px; color: #120F08; outline: none; resize: none; height: 56px; }
+.clv2-sub-txt:focus { border-color: #120F08; }
+.date-modal-ov { display: none; position: fixed; inset: 0; background: rgba(10,8,4,.6); z-index: 500; align-items: flex-end; max-width: 430px; left: 50%; transform: translateX(-50%); }
+.date-modal-ov.on { display: flex; }
+.date-sheet { background: #fff; border-radius: 18px 18px 0 0; width: 100%; padding: 20px 18px calc(var(--safe-bottom) + 20px); }
+.date-sheet-handle { width: 34px; height: 4px; background: #DDD; border-radius: 99px; margin: 0 auto 16px; }
+
+.cal-nav{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.cal-nav-btn{background:#fff;border:1px solid #E8DCC8;border-radius:6px;padding:6px 14px;cursor:pointer;font-size:16px;color:#120F08;}
+.cal-month{font-family:'Playfair Display',serif;font-size:17px;font-weight:700;color:#120F08;}
+.cal-grid{display:grid;grid-template-columns:repeat(7,1fr);gap:2px;}
+.cal-dow{font-family:'DM Mono',monospace;font-size:8px;letter-spacing:1px;text-transform:uppercase;color:#8A7A6A;text-align:center;padding:3px 0;}
+.cal-day{min-height:60px;background:#fff;border:1px solid #F0EDE8;border-radius:5px;padding:3px;}
+.cal-day.other-month{background:#FDFAF4;opacity:.4;}
+.cal-day.today{border-color:#C9A84C;}
+.cal-day.pabellon-abierto{border-top:3px solid #16A34A;}
+.cal-day.pabellon-endovascular{border-top:3px solid #2563EB;}
+.cal-day.hemodinamia{border-top:3px solid #9333EA;}
+.cal-day-num{font-family:'DM Mono',monospace;font-size:10px;color:#8A7A6A;margin-bottom:2px;}
+.cal-day.today .cal-day-num{color:#C9A84C;font-weight:700;}
+.cal-pat-chip{border-radius:3px;padding:1px 3px;font-family:'DM Mono',monospace;font-size:7px;margin-bottom:1px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;cursor:pointer;display:block;}
+.cal-pat-chip.heaven{background:#C9A84C;color:#120F08;}
+.cal-pat-chip.pending{background:#2563EB;color:#fff;}
+.cal-pat-chip.hell{background:#B82424;color:#fff;}
+.cal-legend{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px;}
+.cal-leg-item{display:flex;align-items:center;gap:4px;font-family:'DM Mono',monospace;font-size:8px;color:#8A7A6A;}
+.cal-leg-dot{width:7px;height:7px;border-radius:2px;flex-shrink:0;}
+#cal-screen{display:none;position:fixed;inset:0;background:var(--bg);z-index:150;flex-direction:column;max-width:430px;left:50%;transform:translateX(-50%);}
+.cal-topbar{background:#120F08;padding:calc(var(--safe-top)+12px) 16px 14px;flex-shrink:0;display:flex;align-items:center;justify-content:space-between;}
+.cal-back{background:transparent;border:none;color:#C9A84C;font-family:'Instrument Sans',sans-serif;font-size:14px;font-weight:600;cursor:pointer;padding:0;}
+.cal-scroll{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch;padding:14px;}
 </style>
 </head>
 <body>
@@ -354,6 +405,10 @@ textarea.fgc { resize: none; height: 75px; }
       <div class="tab-i">&#128202;</div>
       <div class="tab-l">Indicadores</div>
     </button>
+    <button class="tab" onclick="openCal()">
+      <div class="tab-i">&#128197;</div>
+      <div class="tab-l">Calendario</div>
+    </button>
     <button class="tab" onclick="doLogout()">
       <div class="tab-i">&#128682;</div>
       <div class="tab-l">Salir</div>
@@ -427,9 +482,113 @@ textarea.fgc { resize: none; height: 75px; }
   </div>
 </div>
 
+
+<div class="date-modal-ov" id="date-modal-ov" onclick="if(event.target===this)this.classList.remove('on')">
+  <div class="date-sheet">
+    <div class="date-sheet-handle"></div>
+    <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:700;margin-bottom:8px">Programar Pabellon</div>
+    <div style="font-size:13px;color:#8A7A6A;margin-bottom:14px" id="date-pat-name"></div>
+    <input type="hidden" id="date-pat-id">
+    <div class="fgrp"><label class="fgl">Fecha de pabellon</label><input type="date" class="fgc" id="date-input"></div>
+    <div style="display:flex;gap:9px;margin-top:14px;">
+      <button class="sft-cancel" onclick="document.getElementById('date-modal-ov').classList.remove('on')">Cancelar</button>
+      <button class="sft-save" style="flex:2" onclick="confirmDateModal()">Confirmar</button>
+    </div>
+  </div>
+</div>
+
+
+<!-- CALENDAR SCREEN -->
+<div id="cal-screen">
+  <div class="cal-topbar">
+    <button class="cal-back" onclick="closeCal()">&#8592; Volver</button>
+    <div style="font-family:'Playfair Display',serif;font-size:16px;font-weight:700;color:#fff;">Calendario</div>
+    <div style="width:60px"></div>
+  </div>
+  <div class="cal-scroll">
+    <div class="cal-nav">
+      <button class="cal-nav-btn" onclick="calPrev()">&#8592;</button>
+      <div class="cal-month" id="cal-month-lbl"></div>
+      <button class="cal-nav-btn" onclick="calNext()">&#8594;</button>
+    </div>
+    <div class="cal-grid" id="cal-grid"></div>
+    <div class="cal-legend" style="margin-top:10px;">
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#16A34A"></div>Pabellon abierto</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#2563EB"></div>Endovascular</div>
+      <div class="cal-leg-item"><div class="cal-leg-dot" style="background:#9333EA"></div>Hemodinamia</div>
+    </div>
+  </div>
+</div>
+
 <div class="tst" id="tst"></div>
 
 <script>
+var CL_V2={lab:{label:"Examenes de laboratorio",type:"simple"},ekg:{label:"EKG",type:"simple"},eco:{label:"Ecocardiograma",type:"simple"},imagenes:{label:"Imagenes",type:"expandable",subs:[{key:"angiotc",label:"AngioTC"},{key:"dopcarot",label:"Eco doppler carotideo"},{key:"angiografia",label:"Angiografia"},{key:"dopven",label:"Eco doppler venoso"}]},interconsultas:{label:"Interconsultas",type:"expandable",subs:[{key:"anestesia",label:"Anestesia",ic:true},{key:"cardiologia",label:"Cardiologia",ic:true},{key:"nefrologia",label:"Nefrologia",ic:true},{key:"bronco",label:"Broncopulmonar",ic:true},{key:"otras",label:"Otras",ic:true,freetext:true}]},consentimiento:{label:"Consentimiento informado",type:"simple"},caprini:{label:"Caprini",type:"simple"},ingreso:{label:"Ingreso medico",type:"simple"}};
+var CL_ORDER=["lab","ekg","eco","imagenes","interconsultas","consentimiento","caprini","ingreso"];
+function makeEmptyV2(){var r={};CL_ORDER.forEach(function(k){var def=CL_V2[k];if(def.type==="simple"){r[k]={done:false};}else{r[k]={open:false,subs:{}};(def.subs||[]).forEach(function(s){r[k].subs[s.key]={state:"off",note:""};});}});return r;}
+function calcProgV2b(clv2){if(!clv2)return 0;var total=0,done=0;CL_ORDER.forEach(function(k){var def=CL_V2[k];if(def.type==="simple"){total++;if(clv2[k]&&clv2[k].done)done++;}else{(def.subs||[]).forEach(function(s){total++;if(clv2[k]&&clv2[k].subs&&clv2[k].subs[s.key]&&clv2[k].subs[s.key].state==="done")done++;});}});return total===0?0:Math.round(done/total*100);}
+function renderChecklistV2b(pt,editable){var clv2=pt.checklist_v2&&Object.keys(pt.checklist_v2).length>0?pt.checklist_v2:makeEmptyV2();var html="";CL_ORDER.forEach(function(k){var def=CL_V2[k];var itemData=clv2[k]||{};html+='<div class="clv2-item">';if(def.type==="simple"){var isDone=itemData.done;var ca=editable?'onclick="toggleV2Simple('+pt.id+',' + "'"+k+"'" + ')"':'';html+='<div class="clv2-main" '+ca+'><div class="clv2-box '+(isDone?'done':'')+'">'+(isDone?'&#10003;':'')+' </div><div class="clv2-lbl">'+def.label+'</div></div>';}else{var subs=itemData.subs||{};var dc=0;(def.subs||[]).forEach(function(s){if(subs[s.key]&&subs[s.key].state==="done")dc++;});var hasAny=Object.values(subs).some(function(v){return v&&v.state!=="off";});var isOpen=itemData.open;var ca=editable?'onclick="toggleV2Expand('+pt.id+',' + "'"+k+"'" + ')"':'';html+='<div class="clv2-main" '+ca+'><div class="clv2-box '+(hasAny?'done':'')+'">'+(hasAny?'&#10003;':'')+' </div><div class="clv2-lbl">'+def.label+' <span style="font-size:11px;color:#8A7A6A">('+dc+'/'+(def.subs||[]).length+')</span></div><div class="clv2-arrow '+(isOpen?'open':'')+' ">&#9654;</div></div>';html+='<div class="clv2-sub '+(isOpen?'open':'')+'" id="clv2sub-'+pt.id+'-'+k+'">';(def.subs||[]).forEach(function(s){var sub=subs[s.key]||{state:"off",note:""};var cls=sub.state==="done"?"done":(sub.state==="pend"?"pend":"");var bx=sub.state==="done"?"&#10003;":(sub.state==="pend"?"P":" ");var cs=editable?'onclick="toggleV2Sub('+pt.id+',' + "'"+k+"','"+s.key+"'" + ')"':'';html+='<div class="clv2-sub-item"><div class="clv2-sub-box '+cls+'" '+cs+'>'+bx+'</div><div class="clv2-sub-right"><div class="clv2-sub-lbl">'+s.label+'</div>';if(sub.state!=="off"||s.freetext){var nid="clv2note-"+pt.id+"-"+k+"-"+s.key;var ba=editable?'onblur="saveV2Note('+pt.id+',' + "'"+k+"','"+s.key+"'" + ',this.value)"':'readonly';html+='<textarea class="clv2-sub-txt" id="'+nid+'" placeholder="Detalle..." '+ba+'>'+( sub.note||'')+'</textarea>';}html+='</div></div>';});html+='</div>';}html+='</div>';});return html;}
+async function toggleV2Simple(pid,key){if(!canEdit())return;var pt=patients.find(function(x){return x.id===pid;});if(!pt)return;if(!pt.checklist_v2||Object.keys(pt.checklist_v2).length===0)pt.checklist_v2=makeEmptyV2();if(!pt.checklist_v2[key])pt.checklist_v2[key]={done:false};pt.checklist_v2[key].done=!pt.checklist_v2[key].done;await saveV2(pid,pt.checklist_v2);openDet(pid);render();}
+async function toggleV2Expand(pid,key){var pt=patients.find(function(x){return x.id===pid;});if(!pt)return;if(!pt.checklist_v2||Object.keys(pt.checklist_v2).length===0)pt.checklist_v2=makeEmptyV2();if(!pt.checklist_v2[key])pt.checklist_v2[key]={open:false,subs:{}};pt.checklist_v2[key].open=!pt.checklist_v2[key].open;var subDiv=document.getElementById("clv2sub-"+pid+"-"+key);if(subDiv){subDiv.classList.toggle("open");var prev=subDiv.previousElementSibling;if(prev){var arr=prev.querySelector(".clv2-arrow");if(arr)arr.classList.toggle("open");}}}
+async function toggleV2Sub(pid,key,subkey){if(!canEdit())return;var pt=patients.find(function(x){return x.id===pid;});if(!pt)return;if(!pt.checklist_v2||Object.keys(pt.checklist_v2).length===0)pt.checklist_v2=makeEmptyV2();if(!pt.checklist_v2[key])pt.checklist_v2[key]={open:true,subs:{}};if(!pt.checklist_v2[key].subs)pt.checklist_v2[key].subs={};var cur=pt.checklist_v2[key].subs[subkey]?pt.checklist_v2[key].subs[subkey].state:"off";var next=cur==="off"?"pend":(cur==="pend"?"done":"off");if(!pt.checklist_v2[key].subs[subkey])pt.checklist_v2[key].subs[subkey]={state:"off",note:""};pt.checklist_v2[key].subs[subkey].state=next;await saveV2(pid,pt.checklist_v2);openDet(pid);render();}
+async function saveV2Note(pid,key,subkey,val){var pt=patients.find(function(x){return x.id===pid;});if(!pt||!pt.checklist_v2||!pt.checklist_v2[key]||!pt.checklist_v2[key].subs)return;if(!pt.checklist_v2[key].subs[subkey])pt.checklist_v2[key].subs[subkey]={state:"off",note:""};pt.checklist_v2[key].subs[subkey].note=val;await saveV2(pid,pt.checklist_v2);}
+async function saveV2(pid,clv2){await sb.from("pacientes").update({checklist_v2:clv2}).eq("id",pid);}
+function scheduleORModal(id){var pt=patients.find(function(x){return x.id===id;});if(!pt)return;document.getElementById("date-pat-name").textContent=pt.nombre;document.getElementById("date-input").value=pt.pabellon||new Date().toISOString().split("T")[0];document.getElementById("date-pat-id").value=id;document.getElementById("date-modal-ov").classList.add("on");}
+async function confirmDateModal(){var id=parseInt(document.getElementById("date-pat-id").value);var ds=document.getElementById("date-input").value;if(!ds)return;await sb.from("pacientes").update({pabellon:ds}).eq("id",id);var pt=patients.find(function(x){return x.id===id;});if(pt)pt.pabellon=ds;document.getElementById("date-modal-ov").classList.remove("on");openDet(id);render();toast("Pabellon: "+fmtD(ds),"s");}
+
+
+var calYear=new Date().getFullYear();
+var calMonth=new Date().getMonth();
+
+function openCal(){
+  document.getElementById("cal-screen").style.display="flex";
+  renderCalendar();
+}
+function closeCal(){
+  document.getElementById("cal-screen").style.display="none";
+}
+function calPrev(){calMonth--;if(calMonth<0){calMonth=11;calYear--;}renderCalendar();}
+function calNext(){calMonth++;if(calMonth>11){calMonth=0;calYear++;}renderCalendar();}
+
+function renderCalendar(){
+  var months=["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
+  var dows=["D","L","M","X","J","V","S"];
+  document.getElementById("cal-month-lbl").textContent=months[calMonth]+" "+calYear;
+  var firstDay=new Date(calYear,calMonth,1).getDay();
+  var daysInMonth=new Date(calYear,calMonth+1,0).getDate();
+  var today=new Date();
+  var byDate={};
+  patients.forEach(function(p){if(p.pabellon){var k=p.pabellon.substring(0,10);if(!byDate[k])byDate[k]=[];byDate[k].push(p);}});
+  var html="";
+  dows.forEach(function(d){html+='<div class="cal-dow">'+d+"</div>";});
+  for(var i=0;i<firstDay;i++) html+='<div class="cal-day other-month"></div>';
+  for(var day=1;day<=daysInMonth;day++){
+    var date=new Date(calYear,calMonth,day);
+    var dow=date.getDay();
+    var ds=calYear+"-"+String(calMonth+1).padStart(2,"0")+"-"+String(day).padStart(2,"0");
+    var isToday=today.getFullYear()===calYear&&today.getMonth()===calMonth&&today.getDate()===day;
+    var dcls="cal-day"+(isToday?" today":"");
+    if(dow===3)dcls+=" pabellon-abierto";
+    else if(dow===4)dcls+=" pabellon-endovascular";
+    else if(dow===1||dow===2||dow===5)dcls+=" hemodinamia";
+    var chips="";
+    if(byDate[ds]){
+      byDate[ds].slice(0,2).forEach(function(p){
+        var rm=getRealm(p);
+        chips+='<span class="cal-pat-chip '+rm+'" onclick="openDetFromCal('+p.id+')" title="'+p.nombre+'">'+p.nombre.split(",")[0]+"</span>";
+      });
+      if(byDate[ds].length>2) chips+='<span style="font-size:7px;color:#8A7A6A">+'+(byDate[ds].length-2)+"</span>";
+    }
+    html+='<div class="'+dcls+'"><div class="cal-day-num">'+day+"</div>"+chips+"</div>";
+  }
+  document.getElementById("cal-grid").innerHTML=html;
+}
+
+function openDetFromCal(id){
+  closeCal();
+  openDet(id);
+}
+
 var SURL = 'https://prdbmwwxyvialtfcatsc.supabase.co';
 var SKEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InByZGJtd3d4eXZpYWx0ZmNhdHNjIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzM4ODY4OTMsImV4cCI6MjA4OTQ2Mjg5M30.uMHiDGS0rVB9aS2IUj0PnBdRHdGP-UVIDtKfp-XuxzA';
 var sb = supabase.createClient(SURL, SKEY);
@@ -610,7 +769,7 @@ function openDet(id) {
   ['lab','imagenes','evaluaciones','docs'].forEach(function(g){
     var dc=0,tc=0;
     p.checklist[g].forEach(function(i){ if(!i.na){tc++;if(i.done)dc++;} });
-    clHTML+='<div class="cl-sec">';
+    
     clHTML+='<div class="cl-grp-hdr">'+gl[g]+'<span class="cl-grp-cnt">'+dc+'/'+tc+'</span></div>';
     p.checklist[g].forEach(function(it,idx){
       var st=it.na?'na':(it.done?'done':'');
@@ -634,7 +793,7 @@ function openDet(id) {
     '<div class="info-sec"><div class="info-sec-hdr">Datos clinicos</div>'+
     '<div class="info-row"><span class="info-lbl">Ingreso lista</span><span class="info-val">'+fmtD(p.fecha_ingreso)+'</span></div>'+
     obs+'</div>'+
-    clHTML+
+    renderChecklistV2b(pt,canEdit())+
     '<div class="qr-sec"><canvas id="qrc'+id+'" width="80" height="80"></canvas><div class="qr-lbl">Dossier #'+String(id).padStart(4,'0')+'</div></div>'+
     '<div style="height:20px"></div>';
 
