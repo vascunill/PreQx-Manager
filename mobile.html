@@ -659,7 +659,7 @@ async function showApp() {
 
 async function loadPats() {
   try {
-    var res=await sb.from('pacientes').select('*, checklist_items(*)').order('created_at',{ascending:true});
+    var res=await sb.from('pacientes').select('*, checklist_items(*)').order('prioridad',{ascending:true}).order('fecha_ingreso',{ascending:true});
     if (res.error) { toast('Error cargando pacientes','e'); return; }
     patients=(res.data||[]).map(function(p){ return Object.assign({},p,{checklist:buildCL(p.patologia,p.checklist_items||[])}); });
     render();
@@ -678,8 +678,9 @@ function buildCL(pat,items) {
 }
 
 function calcProg(p) {
+  if(p.checklist_v2&&Object.keys(p.checklist_v2).length>0) return calcProgV2b(p.checklist_v2);
   var t=0,d=0;
-  ['lab','imagenes','evaluaciones','docs'].forEach(function(g){ p.checklist[g].forEach(function(i){ if(!i.na){t++;if(i.done)d++;} }); });
+  ['lab','imagenes','evaluaciones','docs'].forEach(function(g){ if(p.checklist&&p.checklist[g]) p.checklist[g].forEach(function(i){ if(!i.na){t++;if(i.done)d++;} }); });
   return t===0?100:Math.round(d/t*100);
 }
 function getRealm(p) { if (p.topon) return 'heaven'; var pct=calcProg(p); return pct===100?'heaven':pct===0?'hell':'pending'; }
@@ -751,35 +752,19 @@ function openDet(id) {
   if (!p) return;
   var rm=getRealm(p),pct=calcProg(p),d=getDays(p);
   var bncls={heaven:'bnh',pending:'bnp',hell:'bnl'}[rm];
-  var bntxt={heaven:'Carlos Heaven - Listo para pabellon',pending:'En proceso - Completar checklist',hell:'Nancys Hell - Sin preparacion'}[rm];
+  var bntxt={heaven:"Carlo's Heaven - Listo",pending:'En proceso',hell:"Nancy's Hell - Sin preparacion"}[rm];
   var pcc={heaven:'#C9A84C',pending:'#2563EB',hell:'#B82424'}[rm];
   var ptags2={P1:'t1',P2:'t2',P3:'t3'};
-  var gl={lab:'A. Laboratorio',imagenes:'B. Imagenes',evaluaciones:'C. Evaluaciones',docs:'D. Documentacion'};
 
   document.getElementById('dv-bn').className='dv-bn '+bncls;
   document.getElementById('dv-bn').textContent=bntxt;
   document.getElementById('dv-name').textContent=p.nombre;
   document.getElementById('dv-rut').textContent='RUT '+(p.rut||'--')+' - '+(p.edad||'--')+' anos';
-  var tagsHtml='<span class="tag tp">'+p.patologia+'</span><span class="tag '+(ptags2[p.prioridad]||'')+'">'+p.prioridad+'</span>';
+  var tagsHtml='<span class="tag tp">'+p.patologia+'</span><span class="tag '+(ptags2[p.prioridad]||'')+'" >'+p.prioridad+'</span>';
   if (p.cie10) tagsHtml+='<span class="tag" style="background:#F0F4FF;color:#3B4ED8">'+p.cie10+'</span>';
   document.getElementById('dv-tags').innerHTML=tagsHtml;
 
   var R=40,circ=2*Math.PI*R,dash=circ*pct/100;
-  var clHTML='';
-  ['lab','imagenes','evaluaciones','docs'].forEach(function(g){
-    var dc=0,tc=0;
-    p.checklist[g].forEach(function(i){ if(!i.na){tc++;if(i.done)dc++;} });
-    
-    clHTML+='<div class="cl-grp-hdr">'+gl[g]+'<span class="cl-grp-cnt">'+dc+'/'+tc+'</span></div>';
-    p.checklist[g].forEach(function(it,idx){
-      var st=it.na?'na':(it.done?'done':'');
-      var bx=it.done?'&#10003;':(it.na?'N/A':'');
-      var oc=canEdit()?'onclick="toggleItem('+id+',\''+g+'\','+idx+')"':'';
-      clHTML+='<div class="cli '+st+'" '+oc+'><div class="clbx">'+bx+'</div><div class="cllb">'+it.label+'</div></div>';
-    });
-    clHTML+='</div>';
-  });
-
   var diasTxt=d+' dias en lista'+(p.pabellon?' - Pabellon: '+fmtD(p.pabellon):'');
   var obs=p.observaciones?'<div class="info-row" style="flex-direction:column;gap:3px"><span class="info-lbl">Observaciones</span><span style="font-size:12px;color:var(--ink2);line-height:1.5">'+p.observaciones.substring(0,200)+'</span></div>':'';
 
@@ -793,14 +778,14 @@ function openDet(id) {
     '<div class="info-sec"><div class="info-sec-hdr">Datos clinicos</div>'+
     '<div class="info-row"><span class="info-lbl">Ingreso lista</span><span class="info-val">'+fmtD(p.fecha_ingreso)+'</span></div>'+
     obs+'</div>'+
-    renderChecklistV2b(pt,canEdit())+
+    renderChecklistV2b(p,canEdit())+
     '<div class="qr-sec"><canvas id="qrc'+id+'" width="80" height="80"></canvas><div class="qr-lbl">Dossier #'+String(id).padStart(4,'0')+'</div></div>'+
     '<div style="height:20px"></div>';
 
-  var btnTopon=canEdit()?'<button style="width:100%;padding:13px;border-radius:11px;border:none;font-size:14px;font-weight:600;cursor:pointer;margin-bottom:6px;background:'+(p.topon?'#16A34A':'#120F08')+';color:#fff;" onclick="toggleTopon('+id+')">'+( p.topon?'OK TOPON PA DENTRO':'TOPON PA DENTRO')+'</button>':''; var btnPab=(rm==='heaven'&&canEdit())?'<button class="abtn abtn-p" onclick="scheduleOR('+id+')">Confirmar Pabellon Miercoles</button>':'';
-  var toponColor=p.topon?'#16A34A':'var(--ink)';
-  var toponTxt=p.topon?'TOPON OK - '+( p.topon_by||''):'TOPON PA DENTRO';
+  var toponColor=p.topon?'#16A34A':'#120F08';
+  var toponTxt=p.topon?'OK TOPON PA DENTRO':'TOPON PA DENTRO';
   var btnTopon=canEdit()?'<button class="abtn abtn-p" style="background:'+toponColor+'" onclick="toggleTopon('+id+')">'+toponTxt+'</button>':'';
+  var btnPab=canEdit()?'<button class="abtn abtn-p" style="background:#1C1810" onclick="scheduleORModal('+id+')">&#128197; '+(p.pabellon?'Reprogramar Pabellon':'Programar Pabellon')+'</button>':'';
   var btnEdit=canEdit()?'<button class="abtn abtn-s" onclick="openEdit('+id+')">Editar datos</button>':'';
   var btnDel=role==='admin'?'<button class="abtn abtn-d" onclick="removePat('+id+')">Retirar de lista</button>':'';
   document.getElementById('dv-actions').innerHTML=btnTopon+btnPab+btnEdit+btnDel;
