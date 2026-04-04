@@ -338,53 +338,47 @@ textarea.fgc{resize:vertical;min-height:55px;}
   </div>
 </div>
 
-<div class="tst" id="tst"></div>
 
-<!-- MODAL OPERADO / SEGUIMIENTO -->
 <div class="mo" id="moperado"><div class="mdl wide" style="width:660px;">
-<div class="mhd"><div><div class="mtt">Registro Operatorio & Seguimiento</div><div class="mst">HISTORIAL CLINICO POST-OPERATORIO</div></div><button class="mxb" onclick="cMo('moperado')">X</button></div>
+<div class="mhd"><div><div class="mtt">Registro Operatorio</div><div class="mst">HISTORIAL CLINICO POST-OPERATORIO</div></div><button class="mxb" onclick="cMo('moperado')">X</button></div>
 <div class="mbdy">
 <input type="hidden" id="op-pat-id">
 <div style="background:#F5F3FF;border-radius:10px;padding:14px;margin-bottom:14px;">
 <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#5B21B6;font-weight:700;margin-bottom:12px;">Datos del Procedimiento</div>
 <div class="fg2">
-  <div><label class="fgl">Fecha operacion</label><input class="fgc" id="op-fecha" type="date"></div>
-  <div><label class="fgl">Cirujano</label><input class="fgc" id="op-cirujano" placeholder="Dr. Apellido"></div>
-  <div class="fgf"><label class="fgl">Procedimiento realizado</label><input class="fgc" id="op-procedimiento" placeholder="Ej: Bypass femoro-popliteo derecho con safena"></div>
-  <div><label class="fgl">Via de acceso / Tecnica</label>
-    <select class="fgc" id="op-acceso">
-      <option value="abierta">Cirugia abierta</option>
-      <option value="laparoscopica">Laparoscopica</option>
-      <option value="hibrida">Hibrida (abierta + endovascular)</option>
-      <option value="femoral">Femoral endovascular</option>
-      <option value="otro">Otro</option>
-    </select>
-  </div>
-  <div><label class="fgl">Exito tecnico</label>
-    <select class="fgc" id="op-exito">
-      <option value="si">Si - Exito tecnico completo</option>
-      <option value="parcial">Parcial</option>
-      <option value="no">No - Fracaso tecnico</option>
-    </select>
-  </div>
-</div>
-</div>
+<div><label class="fgl">Fecha operacion</label><input class="fgc" id="op-fecha" type="date"></div>
+<div><label class="fgl">Cirujano</label><input class="fgc" id="op-cirujano" placeholder="Dr. Apellido"></div>
+<div class="fgf"><label class="fgl">Procedimiento realizado</label><input class="fgc" id="op-procedimiento" placeholder="Ej: Bypass femoro-popliteo derecho con safena"></div>
+<div><label class="fgl">Via / Tecnica</label><select class="fgc" id="op-acceso">
+<option value="abierta">Cirugia abierta</option>
+<option value="laparoscopica">Laparoscopica</option>
+<option value="hibrida">Hibrida</option>
+<option value="femoral">Femoral endovascular</option>
+<option value="otro">Otro</option>
+</select></div>
+<div><label class="fgl">Exito tecnico</label><select class="fgc" id="op-exito">
+<option value="si">Si - Exito completo</option>
+<option value="parcial">Parcial</option>
+<option value="no">No - Fracaso tecnico</option>
+</select></div>
+</div></div>
 <div style="background:#FFF8F8;border-radius:10px;padding:14px;margin-bottom:14px;">
 <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#991B1B;font-weight:700;margin-bottom:12px;">Complicaciones</div>
 <div class="fg2">
-  <div class="fgf"><label class="fgl">Complicaciones intraoperatorias</label><textarea class="fgc" id="op-comp-intra" placeholder="Sangrado, lesion vascular, conversion... o Ninguna"></textarea></div>
-  <div class="fgf"><label class="fgl">Complicaciones post-operatorias inmediatas (30 dias)</label><textarea class="fgc" id="op-comp-post" placeholder="Infeccion herida, trombosis injerto, IAM, ACV... o Ninguna"></textarea></div>
-  <div><label class="fgl">Dias de estadia hospitalaria</label><input class="fgc" id="op-estadia" type="number" placeholder="5"></div>
-  <div><label class="fgl">Notas adicionales</label><input class="fgc" id="op-notas" placeholder="Observaciones libres"></div>
-</div>
-</div>
+<div class="fgf"><label class="fgl">Complicaciones intraoperatorias</label><textarea class="fgc" id="op-comp-intra" placeholder="Sangrado, lesion vascular... o Ninguna"></textarea></div>
+<div class="fgf"><label class="fgl">Complicaciones post-op inmediatas (30 dias)</label><textarea class="fgc" id="op-comp-post" placeholder="Infeccion, trombosis injerto, IAM, ACV... o Ninguna"></textarea></div>
+<div><label class="fgl">Dias de estadia</label><input class="fgc" id="op-estadia" type="number" placeholder="5"></div>
+<div><label class="fgl">Notas adicionales</label><input class="fgc" id="op-notas" placeholder="Observaciones libres"></div>
+</div></div>
 <div style="background:#F0FDF4;border-radius:10px;padding:14px;">
-<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#166534;font-weight:700;margin-bottom:12px;">Controles de Seguimiento</div>
+<div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:#166634;font-weight:700;margin-bottom:12px;">Controles de Seguimiento</div>
 <div id="op-controles"></div>
 </div>
 </div>
 <div class="mft"><button class="mb mbc" onclick="cMo('moperado')">Cancelar</button><button class="mb mbs" style="background:#15803D;" onclick="saveOperado()">Guardar Registro</button></div>
 </div></div>
+
+<div class="tst" id="tst"></div>
 <script>
 var CL_V2={lab:{label:"Examenes de laboratorio",type:"simple"},ekg:{label:"EKG",type:"simple"},eco:{label:"Ecocardiograma",type:"simple"},imagenes:{label:"Imagenes",type:"expandable",subs:[{key:"angiotc",label:"AngioTC"},{key:"dopcarot",label:"Eco doppler carotideo"},{key:"angiografia",label:"Angiografia"},{key:"dopven",label:"Eco doppler venoso"}]},interconsultas:{label:"Interconsultas",type:"expandable",subs:[{key:"anestesia",label:"Anestesia",ic:true},{key:"cardiologia",label:"Cardiologia",ic:true},{key:"nefrologia",label:"Nefrologia",ic:true},{key:"bronco",label:"Broncopulmonar",ic:true},{key:"otras",label:"Otras",ic:true,freetext:true}]},consentimiento:{label:"Consentimiento informado",type:"simple"},caprini:{label:"Caprini",type:"simple"},ingreso:{label:"Ingreso medico",type:"simple"}};
 var CL_ORDER=["lab","ekg","eco","imagenes","interconsultas","consentimiento","caprini","ingreso"];
@@ -520,11 +514,11 @@ function render(){
   document.getElementById("fcg").textContent=c.heaven;
   document.getElementById("fcp").textContent=c.pending;
   document.getElementById("fcr").textContent=c.hell;
-  document.getElementById("fco").textContent=c.operado;
+  if(document.getElementById("fco"))document.getElementById("fco").textContent=c.operado;
   var fil=getFilt();
   var list=document.getElementById("plist");
   if(!fil.length){list.innerHTML="<div class=\"emp\"><div class=\"empi\">?</div><div class=\"empt\">Sin pacientes en esta vista</div></div>";return;}
-  var ri={heaven:{i:"&#9728;",l:"Heaven"},pending:{i:"&#8987;",l:"Proceso"},hell:{i:"&#128293;",l:"Hell"},operado:{i:"&#10003;",l:"Operado"}};
+  var ri={heaven:{i:"&#9728;",l:"Heaven"},pending:{i:"&#8987;",l:"Proceso"},hell:{i:"&#128293;",l:"Hell"},operado:{i:"OK",l:"Operado"}};
   var ptag={P1:"t1",P2:"t2",P3:"t3"};
   var html="";
   fil.forEach(function(pt){
@@ -571,14 +565,7 @@ function openDet(id){
   var cie=pt.cie10?"<span class=\"tag\" style=\"background:#F0F4FF;color:#3B4ED8\">"+pt.cie10+"</span>":"";
   var fon=pt.fonasa?"<span class=\"tag\" style=\"background:#F5F0FF;color:#6B21A8\">"+pt.fonasa+"</span>":"";
   var obs=pt.observaciones?"<div class=\"dfl\" style=\"flex-direction:column;gap:3px\"><span class=\"fll\">Observaciones</span><span style=\"font-size:12px;color:#3D3120;line-height:1.5\">"+pt.observaciones+"</span></div>":"";
-  var nControles=pt.followup&&pt.followup.controles?pt.followup.controles.length:0;
-  var operadoAt=pt.operado_at?(' · '+new Date(pt.operado_at).toLocaleDateString("es-CL")):"";
-  var btnOperado=canEdit()?(pt.operado?
-    "<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;\" onclick=\"openFollowup("+id+")\"">&#128203; Ver / Editar Seguimiento"+(nControles?' ('+nControles+' controles)':'')+"</button>"+
-    "<button style=\"width:100%;padding:8px;border-radius:8px;border:1px solid #FFCACA;background:#FFF0F0;color:#991B1B;font-size:12px;cursor:pointer;margin-bottom:6px;\" onclick=\"toggleOperado("+id+")\"">&#8629; Revertir OPERADO</button>"
-    :
-    "<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;\" onclick=\"toggleOperado("+id+")\"">&#10003; MARCAR COMO OPERADO</button>"
-  ):"";
+  var btnOperado=canEdit()?mkBtnOperado(pt,id):"";
   var btnTopon=canEdit()?"<button style=\"width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:"+(pt.topon?"#16A34A":"#120F08")+";color:#fff;\" onclick=\"toggleTopon("+id+")\">"+(pt.topon?"OK TOPON PA DENTRO":"TOPON PA DENTRO")+"</button>":""; var btnPab=canEdit()?"<button class=\"bf bp\" onclick=\"scheduleORModal("+id+")\">"+(pt.pabellon?"&#128197; Reprogramar Pabellon":"&#128197; Programar Pabellon")+"</button>":"";
   var btnEdit=canEdit()?"<button class=\"bf bs\" onclick=\"openEdit("+id+")\">Editar datos</button>":"";
   var btnDel=role==="admin"?"<button class=\"bf bd\" onclick=\"removePat("+id+")\">Retirar de lista</button>":"";
@@ -711,17 +698,38 @@ async function toggleTopon(id) {
   toast(newVal ? 'TOPON PA\' DENTRO confirmado' : 'Topon retirado', newVal ? 's' : '');
 }
 
+
+function mkBtnOperado(pt,id){
+  var n=pt.followup&&pt.followup.controles?pt.followup.controles.length:0;
+  var el=document.createElement("div");
+  if(pt.operado){
+    var b1=document.createElement("button");
+    b1.style.cssText="width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;";
+    b1.textContent="Ver / Editar Seguimiento"+(n?" ("+n+" controles)":"");
+    b1.onclick=function(){openFollowup(id);};
+    var b2=document.createElement("button");
+    b2.style.cssText="width:100%;padding:8px;border-radius:8px;border:1px solid #FFCACA;background:#FFF0F0;color:#991B1B;font-size:12px;cursor:pointer;margin-bottom:6px;";
+    b2.textContent="Revertir OPERADO";
+    b2.onclick=function(){toggleOperado(id);};
+    el.appendChild(b1);el.appendChild(b2);
+  }else{
+    var b=document.createElement("button");
+    b.style.cssText="width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;";
+    b.textContent="MARCAR COMO OPERADO";
+    b.onclick=function(){toggleOperado(id);};
+    el.appendChild(b);
+  }
+  return el.innerHTML;
+}
 async function toggleOperado(id){
   if(!canEdit())return;
   var p=patients.find(function(x){return x.id===id;});if(!p)return;
-  if(!p.operado){
-    openOperadoModal(id);
-  } else {
+  if(!p.operado){openOperadoModal(id);}
+  else{
     if(!confirm("Revertir estado OPERADO?"))return;
     await sb.from("pacientes").update({operado:false,operado_by:null,operado_at:null}).eq("id",id);
     p.operado=false;p.operado_by=null;p.operado_at=null;
-    render();openDet(id);
-    toast("Operado revertido","");
+    render();openDet(id);toast("Operado revertido","");
   }
 }
 function openFollowup(id){openOperadoModal(id);}
@@ -732,7 +740,7 @@ function openOperadoModal(id){
   document.getElementById("op-fecha").value=fo.fecha_op||new Date().toISOString().split("T")[0];
   document.getElementById("op-cirujano").value=fo.cirujano||"";
   document.getElementById("op-procedimiento").value=fo.procedimiento_realizado||"";
-  document.getElementById("op-acceso").value=fo.acceso||"femoral";
+  document.getElementById("op-acceso").value=fo.acceso||"abierta";
   document.getElementById("op-exito").value=fo.exito_tecnico||"si";
   document.getElementById("op-comp-intra").value=fo.comp_intra||"";
   document.getElementById("op-comp-post").value=fo.comp_post||"";
@@ -745,16 +753,14 @@ function openOperadoModal(id){
 function renderControles(controles){
   var html="";
   controles.forEach(function(c,i){
-    html+='<div class="ctrl-item" style="background:#fff;border:1px solid #E8DCC8;border-radius:8px;padding:12px;margin-bottom:8px;">';
+    html+='<div style="background:#fff;border:1px solid #E8DCC8;border-radius:8px;padding:12px;margin-bottom:8px;">';
     html+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">';
     html+='<span style="font-size:9px;font-weight:700;color:#5B21B6;letter-spacing:1px;text-transform:uppercase;">Control '+(i+1)+'</span>';
     html+='<button onclick="removeControl('+i+')" style="background:#FFF0F0;border:none;color:#991B1B;border-radius:4px;padding:2px 8px;font-size:11px;cursor:pointer;">Eliminar</button></div>';
     html+='<div class="fg2">';
     html+='<div><label class="fgl">Fecha</label><input class="fgc" data-ci="'+i+'" data-cf="fecha" value="'+(c.fecha||'')+'" type="date" onchange="updateControl(this)"></div>';
-    html+='<div><label class="fgl">Estado clinico</label><select class="fgc" data-ci="'+i+'" data-cf="estado" onchange="updateControl(this)">';
-    ["Excelente","Bueno","Regular","Complicado","Reintervencion","Fallecido"].forEach(function(op){
-      html+='<option value="'+op+'"'+(c.estado===op?" selected":"")+'>'+op+'</option>';
-    });
+    html+='<div><label class="fgl">Estado</label><select class="fgc" data-ci="'+i+'" data-cf="estado" onchange="updateControl(this)">';
+    ["Excelente","Bueno","Regular","Complicado","Reintervencion","Fallecido"].forEach(function(op){html+='<option value="'+op+'"'+(c.estado===op?" selected":"")+'>'+op+'</option>';});
     html+='</select></div>';
     html+='<div class="fgf"><label class="fgl">Hallazgos / Notas</label><textarea class="fgc" data-ci="'+i+'" data-cf="notas" onchange="updateControl(this)" style="min-height:44px;">'+(c.notas||'')+'</textarea></div>';
     html+='</div></div>';
@@ -762,25 +768,9 @@ function renderControles(controles){
   html+='<button onclick="addControl()" style="width:100%;padding:8px;border:1px dashed #9333EA;border-radius:7px;background:transparent;color:#7C3AED;font-size:13px;cursor:pointer;margin-top:4px;">+ Agregar control</button>';
   document.getElementById("op-controles").innerHTML=html;
 }
-function addControl(){
-  var c=window._controles||[];
-  c.push({fecha:"",estado:"Bueno",notas:""});
-  window._controles=c;
-  renderControles(c);
-}
-function removeControl(i){
-  var c=window._controles||[];
-  c.splice(i,1);
-  window._controles=c;
-  renderControles(c);
-}
-function updateControl(el){
-  var i=parseInt(el.dataset.ci);
-  var field=el.dataset.cf;
-  if(!window._controles)window._controles=[];
-  if(!window._controles[i])window._controles[i]={};
-  window._controles[i][field]=el.value;
-}
+function addControl(){var c=window._controles||[];c.push({fecha:"",estado:"Bueno",notas:""});window._controles=c;renderControles(c);}
+function removeControl(i){var c=window._controles||[];c.splice(i,1);window._controles=c;renderControles(c);}
+function updateControl(el){var i=parseInt(el.dataset.ci);var field=el.dataset.cf;if(!window._controles)window._controles=[];if(!window._controles[i])window._controles[i]={};window._controles[i][field]=el.value;}
 async function saveOperado(){
   if(!canEdit())return;
   var id=parseInt(document.getElementById("op-pat-id").value);
@@ -797,20 +787,13 @@ async function saveOperado(){
     notas_op:document.getElementById("op-notas").value,
     controles:window._controles||[]
   };
-  await sb.from("pacientes").update({
-    operado:true,
-    operado_by:email,
-    operado_at:new Date().toISOString(),
-    followup:followup
-  }).eq("id",id);
+  await sb.from("pacientes").update({operado:true,operado_by:email,operado_at:new Date().toISOString(),followup:followup}).eq("id",id);
   var p=patients.find(function(x){return x.id===id;});
   if(p){p.operado=true;p.operado_by=email;p.operado_at=new Date().toISOString();p.followup=followup;}
-  cMo("moperado");
-  selId=null;
+  cMo("moperado");selId=null;
   document.getElementById("demp").style.display="flex";
   document.getElementById("dcont").style.display="none";
-  render();
-  toast("Paciente registrado como OPERADO","s");
+  render();toast("Paciente registrado como OPERADO","s");
 }
 
 init();
