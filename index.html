@@ -701,25 +701,14 @@ async function toggleTopon(id) {
 
 function mkBtnOperado(pt,id){
   var n=pt.followup&&pt.followup.controles?pt.followup.controles.length:0;
-  var el=document.createElement("div");
+  var st1="width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;";
+  var st2="width:100%;padding:8px;border-radius:8px;border:1px solid #FFCACA;background:#FFF0F0;color:#991B1B;font-size:12px;cursor:pointer;margin-bottom:6px;";
   if(pt.operado){
-    var b1=document.createElement("button");
-    b1.style.cssText="width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;";
-    b1.textContent="Ver / Editar Seguimiento"+(n?" ("+n+" controles)":"");
-    b1.onclick=function(){openFollowup(id);};
-    var b2=document.createElement("button");
-    b2.style.cssText="width:100%;padding:8px;border-radius:8px;border:1px solid #FFCACA;background:#FFF0F0;color:#991B1B;font-size:12px;cursor:pointer;margin-bottom:6px;";
-    b2.textContent="Revertir OPERADO";
-    b2.onclick=function(){toggleOperado(id);};
-    el.appendChild(b1);el.appendChild(b2);
+    return '<button style="'+st1+'" onclick="openFollowup('+id+')">Ver / Editar Seguimiento'+(n?' ('+n+' controles)':'')+'</button>'
+          +'<button style="'+st2+'" onclick="toggleOperado('+id+')">Revertir OPERADO</button>';
   }else{
-    var b=document.createElement("button");
-    b.style.cssText="width:100%;padding:11px;border-radius:8px;border:none;font-size:13px;font-weight:600;cursor:pointer;margin-bottom:6px;background:#15803D;color:#fff;";
-    b.textContent="MARCAR COMO OPERADO";
-    b.onclick=function(){toggleOperado(id);};
-    el.appendChild(b);
+    return '<button style="'+st1+'" onclick="toggleOperado('+id+')">MARCAR COMO OPERADO</button>';
   }
-  return el.innerHTML;
 }
 async function toggleOperado(id){
   if(!canEdit())return;
